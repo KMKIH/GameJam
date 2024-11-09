@@ -128,7 +128,7 @@ GameObject:
   - component: {fileID: 7582456216819745381}
   m_Layer: 5
   m_Name: Bag
-  m_TagString: Stage 1 Mini Game Goal
+  m_TagString: Mini Game Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
