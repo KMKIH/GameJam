@@ -10,6 +10,7 @@ public class MiniGameTarget : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (FindObjectOfType<StageSceneManager>().ClearList[_miniGameManager.gid] == true) return;
+        if (FindObjectOfType<StageSceneManager>().ActiveList[_miniGameManager.gid] == false) return;
 
         if (collision.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
         {

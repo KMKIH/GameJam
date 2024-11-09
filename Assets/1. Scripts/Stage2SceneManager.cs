@@ -36,7 +36,7 @@ public class Stage2SceneManager : StageSceneManager
         if (state == MiniGameState.Success)
         {
             // 해당하는 오브젝트 컬러입히기
-            clearList[gid] = true;
+            ClearList[gid] = true;
 
             // 0.5초 후에 클리어 체크
             if (clearList[0] && clearList[1] && clearList[2])

@@ -34,6 +34,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
             {
                 _miniGame3State.life -= 1;
             }
+            FindObjectOfType<Stage1MiniGame3Goal>().PlayEat();
             EatFood();
             return;
         }
@@ -88,6 +89,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
 
     void EatFood()
     {
+        FindObjectOfType<Stage1MiniGame3Goal>().PlayAH();
         _miniGame3State.isMouseOpen = true;
         _miniGame3State.index = (_miniGame3State.index + 1) % _miniGame3State.foods.Count;
         m_foodEat.RaiseEvent();

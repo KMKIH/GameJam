@@ -36,7 +36,8 @@ public class Stage1MiniGame3 : MiniGameManager
         _miniGame3State.isReverse = false;
         StartCoroutine(InstantiateNewFood());
     }
-    
+
+
     IEnumerator InstantiateNewFood()
     {
         yield return new WaitForSeconds(1f);

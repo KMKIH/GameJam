@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class MiniGameManager : MonoBehaviour
 {
@@ -20,9 +21,10 @@ public abstract class MiniGameManager : MonoBehaviour
         if (realObject != null && realObject.activeSelf)
             Destroy(realObject);
     }
-    public void OnSuccessMiniGame()
+    public async void OnSuccessMiniGame()
     {
         _gameState.MiniGameState = MiniGameState.Success;
+        await UniTask.WaitForSeconds(1);
         EndMiniGame();
     }
 }

@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: CutScene1_2
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 212
+        width: 691
+        height: 685
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a525c1ee9a1ee84fbc1c0dcd6552308
+      internalID: 1521242909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CutScene1_0
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 983
+        width: 691
+        height: 685
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85e31aa32a9f6a1439d766f1e22d95f8
+      internalID: 584636963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CutScene1_1
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 983
+        width: 691
+        height: 685
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b20b989bcd0e68b4ba4c8b180e2ad0c1
+      internalID: 568237100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CutScene1_3
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 226
+        width: 691
+        height: 685
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e3025cc03052f34e9c60807e5f7c9fc
+      internalID: -1453402587
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +203,12 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      CutScene1_0: 584636963
+      CutScene1_1: 568237100
+      CutScene1_2: 1521242909
+      CutScene1_3: -1453402587
+      CutScene1_4_2: -1434436291
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
