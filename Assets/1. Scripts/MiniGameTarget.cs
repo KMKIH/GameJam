@@ -5,6 +5,7 @@ using UnityEngine;
 public class MiniGameTarget : MonoBehaviour
 {
     [SerializeField] private GameStateSO _gameState;
+    [SerializeField] private MiniGameManager _miniGameManager;
 
     public void OnCollisionEnter2D(Collision2D other)
     {
@@ -12,6 +13,8 @@ public class MiniGameTarget : MonoBehaviour
         {
             Debug.Log("Mini Game Start!");
             _gameState.playerState = PlayerState.MiniGame;
+            _gameState.targetMiniGame = _miniGameManager;
+            _gameState.StartMiniGame();
         }
     }
 }

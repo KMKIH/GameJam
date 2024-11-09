@@ -15,12 +15,13 @@ public enum MiniGameState
     Success,
     Failed,
     Pause,
-    Exit,
 }
 [CreateAssetMenu(menuName = "State/GameState", fileName = "Game State")]
 public class GameStateSO : ScriptableObject
 {
     public GameObject targetObject;
+    public MiniGameManager targetMiniGame;
+
     public PlayerState playerState;
     private MiniGameState _miniGameState;
     public MiniGameState MiniGameState
@@ -40,5 +41,11 @@ public class GameStateSO : ScriptableObject
     public void ResetGameState()
     {
         targetObject = null;
+        targetMiniGame = null;
+    }
+    public void StartMiniGame()
+    {
+        MiniGameState = MiniGameState.OnGoing;
+        targetMiniGame.StartMiniGame();
     }
 }
