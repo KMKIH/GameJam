@@ -57,8 +57,7 @@ public class PlayerController : MonoBehaviour
         // 이동 요청
         else if (hit)
         {
-            // 좌측 포커스 변경 요청
-            GameManager.instance.RequestFocusLeft();
+            Debug.Log("Request Focus Left");
         }
     }
 }
