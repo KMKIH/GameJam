@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Mini Game Goal
   - Mini Game
+  - Mini Game Target
   layers:
   - Default
   - TransparentFX

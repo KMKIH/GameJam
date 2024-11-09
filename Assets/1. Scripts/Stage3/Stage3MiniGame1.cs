@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Stage3MiniGame1 : MiniGameManager
@@ -18,14 +16,5 @@ public class Stage3MiniGame1 : MiniGameManager
         {
             OnSuccessMiniGame();
         }
-    }
-
-    public override void StartMiniGame()
-    {
-        Instantiate(this.gameObject);
-    }
-    public override void EndMiniGame()
-    {
-        Destroy(this.gameObject);
     }
 }
