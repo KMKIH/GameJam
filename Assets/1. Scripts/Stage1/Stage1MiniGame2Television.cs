@@ -28,6 +28,7 @@ public class Stage1MiniGame2Television : MonoBehaviour
         if (_miniGame2State.isChannelChanged && 
             _miniGame2State.channel != "175")
         {
+            _miniGame2State.isChannelChanged = false;
             var spriteIndex = UnityEngine.Random.Range(0, failedImage.Length);
             _image.sprite = failedImage[spriteIndex];
             return;
