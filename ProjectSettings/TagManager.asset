@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Stage 1 Mini Game Goal
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - Water
   - UI
   - Background
-  - 
+  - Stage 1 Mini Game
   - 
   - 
   - 
