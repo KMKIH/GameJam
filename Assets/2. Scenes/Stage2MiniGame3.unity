@@ -1349,11 +1349,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1222370974 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5172999128511095514, guid: e61a77076e57a4394a79116df9c66948, type: 3}
-  m_PrefabInstance: {fileID: 930202364955505839}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1246064297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2268,21 +2263,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1252464283859703531, guid: e61a77076e57a4394a79116df9c66948, type: 3}
   m_PrefabInstance: {fileID: 930202364955505839}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1541822714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1222370974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7313a743b3a804dbe889d20e1c14f5ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameState: {fileID: 11400000, guid: b160135c72e2b4f3e8bd49940d7fdfe8, type: 2}
-  gid: 0
-  m_gameClear: {fileID: 11400000, guid: 6e91b8f78b01d45fc90edcfe3ce82f84, type: 2}
 --- !u!1 &1572380159
 GameObject:
   m_ObjectHideFlags: 0
@@ -3396,38 +3376,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage 2 Mini Game 3 Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 7575992827490818706, guid: e61a77076e57a4394a79116df9c66948, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5172999128511095514, guid: e61a77076e57a4394a79116df9c66948, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1541822714}
-    - targetCorrespondingSourceObject: {fileID: 7775450318145349239, guid: e61a77076e57a4394a79116df9c66948, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8806098200239739212}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e61a77076e57a4394a79116df9c66948, type: 3}
---- !u!1 &3415194142589889307 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7775450318145349239, guid: e61a77076e57a4394a79116df9c66948, type: 3}
-  m_PrefabInstance: {fileID: 930202364955505839}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8806098200239739212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3415194142589889307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50a985897a55f46a7801419d76672c96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_gameClear: {fileID: 11400000, guid: 6e91b8f78b01d45fc90edcfe3ce82f84, type: 2}
-  size: 100
-  dragDistanceThreshold: 50
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
