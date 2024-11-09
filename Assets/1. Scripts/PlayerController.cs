@@ -1,3 +1,4 @@
+using NavMeshPlus.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -103,25 +104,32 @@ public class PlayerController : MonoBehaviour
     private void MoveToClickPosition()
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(ray);
 
-        // 이동
-        if (hit && _gameState.playerState == PlayerState.FocusLeft)
+        foreach (var hit in hits)
         {
-            GameObject clickedObject = hit.collider.gameObject;
-
-            if (hit.collider != null)
+            // 이동
+            if (hit && _gameState.playerState == PlayerState.FocusLeft)
             {
-                // 이동
-                _agent.SetDestination(hit.point);
-                _gameState.targetObject = clickedObject;
-            }
-        }
+                if (hit.collider != null)
+                {
+                    // 이동
+                    _agent.SetDestination(hit.point);
+                }
 
-        // 이동 요청
-        else if (hit)
-        {
-            Debug.Log("Request Focus Left");
+                // clicked Object 저장
+                GameObject clickedObject = hit.collider.gameObject;
+                if (clickedObject.TryGetComponent(out NavMeshModifier navMeshModifier) && navMeshModifier.area == 1)
+                {
+                    _gameState.targetObject = clickedObject;
+                }
+            }
+
+            // 이동 요청
+            else if (hit)
+            {
+                Debug.Log("Request Focus Left");
+            }
         }
     }
 }

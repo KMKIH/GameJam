@@ -11,16 +11,11 @@ public class CutSceneSystem : MonoBehaviour
     [SerializeField] private GameStateSO _gameState;
 
     // Cutscene
-    [SerializeField]
-    Animator cutSceneAnimator;
-    [SerializeField]
-    Transform dialogParents;
-    [SerializeField]
-    GameObject dialogBackground;
-    [SerializeField]
-    CutSceneDialog[] cutSceneDialogs;
-    [SerializeField]
-    GameObject dialogUIPrefab;
+    [SerializeField] Animator cutSceneAnimator;
+    [SerializeField] Transform dialogParents;
+    [SerializeField] GameObject dialogBackground;
+    [SerializeField] CutSceneDialog[] cutSceneDialogs;
+    [SerializeField] GameObject dialogUIPrefab;
 
     public async UniTask StartCutScene(int gid)
     {
@@ -38,7 +33,7 @@ public class CutSceneSystem : MonoBehaviour
     }
     async UniTask CutScene(int gid)
     {
-        // TODO: gid에 맞는 애니메이션 실행
+        cutSceneAnimator.Play("CutScene" + gid);
         while (true)
         {
             await UniTask.NextFrame();
