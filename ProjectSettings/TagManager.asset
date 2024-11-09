@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Stage 1 Mini Game Goal
+  - Mini Game Goal
+  - Mini Game
   layers:
   - Default
   - TransparentFX

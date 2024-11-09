@@ -17,7 +17,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
 
     void Awake()
     {
-        _targetUI = GameObject.FindGameObjectsWithTag("Stage 1 Mini Game Goal")[0].GetComponent<RectTransform>();
+        _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
         _isGrabbed = false;
     }
