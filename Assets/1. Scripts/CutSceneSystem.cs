@@ -24,6 +24,8 @@ public class CutSceneSystem : MonoBehaviour
 
     public async UniTask StartCutScene(int gid)
     {
+        GameManager.instance.playerState = PlayerState.CutScene;
+
         cutSceneAnimator.gameObject.SetActive(true);
         dialogBackground.SetActive(true);
         isCutsceneActing = false;
@@ -33,6 +35,8 @@ public class CutSceneSystem : MonoBehaviour
         isCutsceneActing = true;
         dialogBackground.SetActive(false);
         cutSceneAnimator.gameObject.SetActive(false);
+
+        GameManager.instance.playerState = PlayerState.FocusLeft;
     }
     async UniTask CutScene(int gid)
     {

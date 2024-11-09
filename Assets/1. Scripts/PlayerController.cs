@@ -5,25 +5,14 @@ using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-
-    enum PlayerState
-    {
-        Idle,
-        Moving,
-    }
-
-    PlayerState _state = PlayerState.Idle;
     [SerializeField] private GameStateSO _gameState;
-    Vector3 _destPos;
 
     private NavMeshAgent _agent;
-    private Rigidbody2D _rigidbody;
     private Camera _mainCamera;
 
     private void Start()
     {
         _mainCamera = Camera.main;
-        _rigidbody = GetComponent<Rigidbody2D>();
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
@@ -37,8 +26,8 @@ public class PlayerController : MonoBehaviour
         {
             MoveToClickPosition();
         }
-    }
 
+    }
     public void OnCollisionEnter2D(Collision2D other)
     {
         if (_gameState.targetObject == other.gameObject)
@@ -52,7 +41,9 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-        if (hit)
+
+        // 이동
+        if (hit && GameManager.instance.playerState == PlayerState.FocusLeft)
         {
             GameObject clickedObject = hit.collider.gameObject;
 
@@ -61,6 +52,13 @@ public class PlayerController : MonoBehaviour
                 _agent.SetDestination(hit.point);
                 _gameState.targetObject = clickedObject;
             }
+        }
+
+        // 이동 요청
+        else if (hit)
+        {
+            // 좌측 포커스 변경 요청
+            GameManager.instance.RequestFocusLeft();
         }
     }
 }
