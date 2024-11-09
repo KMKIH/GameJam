@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage1MiniGame3Item : MonoBehaviour
 {
     [SerializeField] private Stage1MiniGame3StateSO _miniGame3State;
+    [SerializeField] private VoidEventChannelSO m_foodEat;
     private RectTransform _targetUI;
     public Stage1MiniGame3ItemSO miniGameItemData;
     private RectTransform _rectTransform;
@@ -18,7 +19,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
     }
     void Update()
     {
-        if (IsOverlapping(_targetUI))
+        if (IsContained(_targetUI))
         {
             if (miniGameItemData.isRightItem)
             {
@@ -28,17 +29,30 @@ public class Stage1MiniGame3Item : MonoBehaviour
             {
                 _miniGame3State.life -= 1;
             }
-            _miniGame3State.isMouthOpen = false;
-            _miniGame3State.index = (_miniGame3State.index + 1) % 3;
-            Destroy(gameObject);
+            EatFood();
+            return;
         }
-        if (_miniGame3State.isMouthOpen)
+        
+        if (!_miniGame3State.isMouseOpen && RectTransformToScreenSpace(_rectTransform).xMin >= 420f)
         {
-            _rectTransform.anchoredPosition = new Vector2(_rectTransform.anchoredPosition.x - Time.deltaTime * 200f, _rectTransform.anchoredPosition.y);
-        } else {
-            if (_rectTransform.anchoredPosition.x >= _originalPos.x) return;
-            _rectTransform.anchoredPosition = new Vector2(_rectTransform.anchoredPosition.x + Time.deltaTime * 200f, _rectTransform.anchoredPosition.y);
+            EatFood();
+            return;
         }
+        if (!_miniGame3State.isReverse && !_miniGame3State.isMouseOpen && IsOverlapping(_targetUI))
+        {
+            _miniGame3State.isReverse = true;
+        }
+        if (!_miniGame3State.isMouseOpen && _miniGame3State.isReverse)
+        {
+            _rectTransform.anchoredPosition = new Vector2(
+                _rectTransform.anchoredPosition.x + Time.deltaTime * 200f, 
+                _rectTransform.anchoredPosition.y);
+            return;
+        }
+        _rectTransform.anchoredPosition = new Vector2(
+            _rectTransform.anchoredPosition.x - Time.deltaTime * 200f, 
+            _rectTransform.anchoredPosition.y);
+        
     }
 
     bool IsOverlapping(RectTransform other)
@@ -47,10 +61,24 @@ public class Stage1MiniGame3Item : MonoBehaviour
         Rect rect2 = RectTransformToScreenSpace(other);
         return rect1.Overlaps(rect2);
     }
+    bool IsContained(RectTransform other)
+    {
+        Rect rect1 = RectTransformToScreenSpace(_rectTransform);
+        Rect rect2 = RectTransformToScreenSpace(other);
+        return rect2.Contains(rect1.min) && rect2.Contains(rect1.max);
+    }
 
     Rect RectTransformToScreenSpace(RectTransform transform)
     {
         Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
         return new Rect((Vector2)transform.anchoredPosition - (size * 0.5f), size);
+    }
+
+    void EatFood()
+    {
+        _miniGame3State.isMouseOpen = false;
+        _miniGame3State.index = (_miniGame3State.index + 1) % _miniGame3State.foods.Count;
+        m_foodEat.RaiseEvent();
+        Destroy(gameObject);
     }
 }

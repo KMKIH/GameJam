@@ -8,14 +8,9 @@ public class Stage1MiniGame3Goal : MonoBehaviour
 {
     [SerializeField] private Stage1MiniGame3StateSO _miniGame3State;
 
-    void Start()
-    {
-        _miniGame3State.ResetState();
-    }
-
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _miniGame3State.isBabyActive)
         {
             OnClick();
         }
@@ -37,7 +32,7 @@ public class Stage1MiniGame3Goal : MonoBehaviour
             {
                 if (result.gameObject == gameObject)
                 {
-                    _miniGame3State.isMouthOpen = !_miniGame3State.isMouthOpen;
+                    _miniGame3State.isMouseOpen = !_miniGame3State.isMouseOpen;
                 }
             }
         }

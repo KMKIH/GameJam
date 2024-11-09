@@ -33,11 +33,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 360, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 310, y: 0}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 1, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3481452999524033587
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -89,4 +89,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGame3State: {fileID: 11400000, guid: 83d9c0328898640cd8beb7e4081df2ad, type: 2}
+  m_foodEat: {fileID: 11400000, guid: cd59b8b332f7941d586d417c1d5a5ac5, type: 2}
   miniGameItemData: {fileID: 11400000, guid: 570f0f4668de346e4bee0dcbdaecccdd, type: 2}

@@ -12,7 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a9579a741ad146429a2a753715dbcfe, type: 3}
   m_Name: Mini Game 3 State
   m_EditorClassIdentifier: 
-  life: 0
-  isEating: 0
-  index: 0
-  foods: []
+  life: 1
+  isMouthOpen: 0
+  index: 1
+  foods:
+  - {fileID: 2184885651635421725, guid: b0c2db6494f184ecb984f9ea23788b3b, type: 3}
+  - {fileID: 2184885651635421725, guid: cd5000951479f463ba7eb98b21bf3789, type: 3}
+  - {fileID: 2184885651635421725, guid: b0c2db6494f184ecb984f9ea23788b3b, type: 3}
