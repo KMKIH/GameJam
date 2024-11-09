@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
             }
 
             // 이동 요청
-            else if (hit && _gameState.playerState == PlayerState.MiniGame)
+            else if (hit && _gameState.playerState == PlayerState.MiniGame && hit.collider.gameObject.layer != LayerMask.NameToLayer("UI"))
             {
                 FindObjectOfType<GameManager>().TurnExitPopUp(true);
             }

@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using Cysharp.Threading.Tasks;
-
-public class Stage1SceneManager : StageSceneManager
+public class Stage2SceneManager : StageSceneManager
 {
     private void Start()
     {
@@ -36,7 +33,7 @@ public class Stage1SceneManager : StageSceneManager
     // Event
     void CheckClearState(int gid, MiniGameState state)
     {
-        if(state == MiniGameState.Success)
+        if (state == MiniGameState.Success)
         {
             // 해당하는 오브젝트 컬러입히기
             clearList[gid] = true;
@@ -47,12 +44,12 @@ public class Stage1SceneManager : StageSceneManager
                 // 페이드 아웃 이후
 
                 // 다음 스테이지 넘어가기
-                SceneManager.LoadScene("Stage2");
+                SceneManager.LoadScene("Stage3");
             }
 
             ///////////////////////////////////////////
             // 오브젝트 변경
-            for(int i = 0; i < 3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 if (clearList[i])
                 {
