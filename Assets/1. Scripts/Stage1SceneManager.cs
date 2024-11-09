@@ -4,14 +4,7 @@ using UnityEngine;
 using Cysharp.Threading.Tasks;
 
 public class Stage1SceneManager : MonoBehaviour
-{
-    // Flags
-    bool isCutsceneActing = false;
-
-    // Cutscene
-    [SerializeField]
-    Animator cutSceneAnimator;
-
+{ 
     private void Start()
     {
         switch (PlayerPrefs.GetInt("NewGame"))
@@ -26,25 +19,10 @@ public class Stage1SceneManager : MonoBehaviour
     }
     async void NewGame()
     {
-        isCutsceneActing = false;
-        await UniTask.WhenAll(CutScene());
-        isCutsceneActing = true;
-        cutSceneAnimator.gameObject.SetActive(false);
+        await FindObjectOfType<CutSceneSystem>().StartCutScene(1);
     }
     void Resume()
     {
         // TODO: PlayerPref?? ??????? ????? ???????
-    }
-
-    async UniTask CutScene()
-    {
-        while (true)
-        {
-            await UniTask.NextFrame();
-            if (cutSceneAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f)
-            {
-                break;
-            }
-        }
     }
 }
