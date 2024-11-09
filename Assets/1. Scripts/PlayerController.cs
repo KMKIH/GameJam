@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
         // ¿Ãµø
-        if (hit && GameManager.instance.playerState == PlayerState.FocusLeft)
+        if (hit && _gameState.playerState == PlayerState.FocusLeft)
         {
             GameObject clickedObject = hit.collider.gameObject;
 

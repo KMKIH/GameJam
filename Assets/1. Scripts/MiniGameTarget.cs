@@ -11,7 +11,7 @@ public class MiniGameTarget : MonoBehaviour
         if (other.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
         {
             Debug.Log("Mini Game Start!");
-            GameManager.instance.playerState = PlayerState.MiniGame;
+            _gameState.playerState = PlayerState.MiniGame;
         }
     }
 }

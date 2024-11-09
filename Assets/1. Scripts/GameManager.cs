@@ -2,22 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerState
-{
-    FocusLeft,
-    CutScene,
-    MiniGame,
-}
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance { get; private set; }
     [SerializeField] private GameStateSO _gameState;
 
-    [Header("Player State (for Debug)")]
-    [SerializeField] public PlayerState playerState = PlayerState.FocusLeft;
-
     private void Awake()
     {
+        instance = this;
+        /*
         if (instance == null)
         {
             instance = this;
@@ -27,6 +20,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        */
     }
 
     private void Start()
@@ -35,12 +29,13 @@ public class GameManager : MonoBehaviour
     }
     public void RequestFocusLeft()
     {
-        if(playerState == PlayerState.MiniGame) // 미니게임인 경우에만 요청 가능
+        if(_gameState.playerState == PlayerState.MiniGame) // 미니게임인 경우에만 요청 가능
         {
             Debug.Log("Request Focus Left");
             // TODO: 팝업 UI ON
         }
     }
+    
     // 취소버튼 클릭
     public void OnClickCancel()
     {

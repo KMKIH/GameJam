@@ -7,8 +7,8 @@ using Cysharp.Threading.Tasks;
 
 public class CutSceneSystem : MonoBehaviour
 {
-    // Flags
-    bool isCutsceneActing = false;
+    // gameState
+    [SerializeField] private GameStateSO _gameState;
 
     // Cutscene
     [SerializeField]
@@ -24,19 +24,17 @@ public class CutSceneSystem : MonoBehaviour
 
     public async UniTask StartCutScene(int gid)
     {
-        GameManager.instance.playerState = PlayerState.CutScene;
+        _gameState.playerState = PlayerState.CutScene;
 
         cutSceneAnimator.gameObject.SetActive(true);
         dialogBackground.SetActive(true);
-        isCutsceneActing = false;
 
         await UniTask.WhenAll(CutScene(gid),CutSceneDialog(gid));
 
-        isCutsceneActing = true;
         dialogBackground.SetActive(false);
         cutSceneAnimator.gameObject.SetActive(false);
 
-        GameManager.instance.playerState = PlayerState.FocusLeft;
+        _gameState.playerState = PlayerState.FocusLeft;
     }
     async UniTask CutScene(int gid)
     {
