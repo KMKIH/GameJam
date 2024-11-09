@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stage1MiniGame3Item : MonoBehaviour
 {
+    Stage1MiniGame3 gameManager;
     [SerializeField] private Stage1MiniGame3StateSO _miniGame3State;
     [SerializeField] private VoidEventChannelSO m_foodEat;
     private RectTransform _targetUI;
@@ -13,13 +14,17 @@ public class Stage1MiniGame3Item : MonoBehaviour
 
     void Start()
     {
+        gameManager = FindObjectOfType<Stage1MiniGame3>();
         _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
         _originalPos = _rectTransform.anchoredPosition;
     }
     void Update()
     {
-        if (IsContained(_targetUI))
+        if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
+
+        // 먹음
+        if (RectTransformToScreenSpace(_rectTransform).xMin <= -950f)
         {
             if (miniGameItemData.isRightItem)
             {
@@ -32,26 +37,33 @@ public class Stage1MiniGame3Item : MonoBehaviour
             EatFood();
             return;
         }
-        
-        if (!_miniGame3State.isMouseOpen && RectTransformToScreenSpace(_rectTransform).xMin >= 420f)
-        {
-            EatFood();
-            return;
-        }
-        if (!_miniGame3State.isReverse && !_miniGame3State.isMouseOpen && IsOverlapping(_targetUI))
+
+        // 입이 닫혀 있다면 Back
+        if (!_miniGame3State.isReverse && !_miniGame3State.isMouseOpen && RectTransformToScreenSpace(_rectTransform).xMin <= -770f)
         {
             _miniGame3State.isReverse = true;
         }
-        if (!_miniGame3State.isMouseOpen && _miniGame3State.isReverse)
+
+        // 뒤로 이동
+        if (_miniGame3State.isReverse)
         {
             _rectTransform.anchoredPosition = new Vector2(
-                _rectTransform.anchoredPosition.x + Time.deltaTime * 200f, 
+                _rectTransform.anchoredPosition.x + Time.deltaTime * 400f, 
                 _rectTransform.anchoredPosition.y);
+            if(RectTransformToScreenSpace(_rectTransform).xMin >= 55f)
+            {
+                EatFood();
+            }
             return;
         }
-        _rectTransform.anchoredPosition = new Vector2(
-            _rectTransform.anchoredPosition.x - Time.deltaTime * 200f, 
-            _rectTransform.anchoredPosition.y);
+        // 앞으로 이동
+        else
+        { 
+            _rectTransform.anchoredPosition = new Vector2(
+                _rectTransform.anchoredPosition.x - Time.deltaTime * 400f,
+                _rectTransform.anchoredPosition.y);
+        }
+        
         
     }
 
@@ -76,7 +88,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
 
     void EatFood()
     {
-        _miniGame3State.isMouseOpen = false;
+        _miniGame3State.isMouseOpen = true;
         _miniGame3State.index = (_miniGame3State.index + 1) % _miniGame3State.foods.Count;
         m_foodEat.RaiseEvent();
         Destroy(gameObject);

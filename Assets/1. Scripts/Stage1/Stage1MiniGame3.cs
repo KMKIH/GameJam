@@ -19,7 +19,7 @@ public class Stage1MiniGame3 : MiniGameManager
     {
         if (_miniGame3State.life >= 3)
         {
-            EndMiniGame();
+            OnSuccessMiniGame();
         }
     }
 

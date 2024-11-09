@@ -38,6 +38,8 @@ public class GameStateSO : ScriptableObject
                     case MiniGameState.Success:
                     case MiniGameState.End:
                         playerState = PlayerState.FocusLeft;break;
+                    default:
+                        playerState = PlayerState.MiniGame; break;
                 }
             }
         }

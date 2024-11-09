@@ -27,7 +27,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
         if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
 
         // 오브젝트 잃었을때 대비
-        if(_targetUI == null) _targetUI = GameObject.FindGameObjectsWithTag("Stage 1 Mini Game Goal")[0].GetComponent<RectTransform>();
+        if(_targetUI == null) _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         if(_rectTransform) _rectTransform = GetComponent<RectTransform>();
 
         // Grab

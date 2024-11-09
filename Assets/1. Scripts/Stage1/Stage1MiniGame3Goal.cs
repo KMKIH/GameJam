@@ -12,7 +12,8 @@ public class Stage1MiniGame3Goal : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && _miniGame3State.isBabyActive)
         {
-            OnClick();
+            _miniGame3State.isMouseOpen = !_miniGame3State.isMouseOpen;
+            // OnClick();
         }
     }
 
