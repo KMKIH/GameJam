@@ -25,7 +25,6 @@ public class Stage1MiniGame2 : MiniGameManager
         _miniGame2State.isControllerAvailable = false;
         yield return new WaitForSeconds(2f);
         OnSuccessMiniGame();
-        EndMiniGame();
     }
     IEnumerator ResetChannel()
     {
