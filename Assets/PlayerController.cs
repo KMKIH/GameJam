@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,54 +18,33 @@ public class PlayerController : MonoBehaviour
     PlayerState _state = PlayerState.Idle;
     Vector3 _destPos;
 
+    private NavMeshAgent _agent;
+    private Camera _mainCamera;
+
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+        _agent = GetComponent<NavMeshAgent>();
+        _agent.updateRotation = false;
+        _agent.updateUpAxis = false;
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            OnMouseClicked();
-        }
-        switch (_state)
-        {
-            case PlayerState.Idle:
-                UpdateIdle();
-                break;
-            case PlayerState.Moving:
-                UpdateMoving();
-                break;
+            MoveToClickPosition();
         }
     }
 
-    void UpdateIdle()
+    void MoveToClickPosition()
     {
+        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 
-    }
-
-    void UpdateMoving()
-    {
-        Vector3 dir = _destPos - transform.position;
-
-        if (dir.magnitude < 0.01f)
+        if (hit.collider != null)
         {
-            _state = PlayerState.Idle;
-        }
-        else
-        {
-            float moveDist = Mathf.Clamp(_speed * Time.deltaTime, 0, dir.magnitude);
-            transform.position += dir.normalized * moveDist;
-            // transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 0.2f);
-        }
-    }
-
-    void OnMouseClicked()
-    {
-        _state = PlayerState.Moving;
-        _destPos = (Vector2) (Camera.main.ScreenToWorldPoint(Input.mousePosition));
-
-        Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        RaycastHit2D hitInformation = Physics2D.Raycast(touchPos, Camera.main.transform.forward);
-        if (hitInformation.collider != null)
-        {
-            Debug.Log(hitInformation.collider.gameObject.name);
+            _agent.SetDestination(hit.point);
         }
     }
 }
