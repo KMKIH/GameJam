@@ -499,7 +499,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Stage 1 Mini Game 3 Canvas
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4100680307952594450, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3314180717031919839, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
     m_AddedGameObjects:
