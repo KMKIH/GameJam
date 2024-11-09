@@ -9,6 +9,14 @@ public class PlayerController : MonoBehaviour
 
     private NavMeshAgent _agent;
     private Camera _mainCamera;
+    private Animator _anim;
+    private SpriteRenderer _sr;
+
+    enum LastLookDir
+    {
+        Front, Back, Left, Right
+    }
+    LastLookDir lookDir = LastLookDir.Front;
 
     private void Start()
     {
@@ -18,6 +26,9 @@ public class PlayerController : MonoBehaviour
         _agent.updateUpAxis = false;
         _agent.speed = 10;
         _agent.acceleration = 20;
+
+        _anim = GetComponent<Animator>();
+        _sr = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -27,6 +38,58 @@ public class PlayerController : MonoBehaviour
             MoveToClickPosition();
         }
 
+
+
+        // 애니메이션
+        if (_agent.hasPath)
+        {
+            var xDir = _agent.velocity.normalized.x;
+            var yDir = _agent.velocity.normalized.y;
+            if (Mathf.Abs(xDir) > Mathf.Abs(yDir))
+            {
+                _anim.Play("MoveSide");
+                if (xDir > 0)
+                {
+                    _sr.flipX = true;
+                    lookDir = LastLookDir.Right;
+                }
+                else
+                {
+                    _sr.flipX = false;
+                    lookDir = LastLookDir.Left;
+                }
+            }
+            else if (yDir > 0)
+            {
+                _anim.Play("MoveBack");
+                lookDir = LastLookDir.Back;
+            }
+            else
+            {
+                _anim.Play("MoveFront");
+                lookDir = LastLookDir.Front;
+            }
+        }
+        else
+        {
+            switch (lookDir)
+            {
+                case LastLookDir.Front:
+                    _anim.Play("IdleFront");
+                    break;
+                case LastLookDir.Back:
+                    _anim.Play("IdleBack");
+                    break;
+                case LastLookDir.Left:
+                    _sr.flipX = false;
+                    _anim.Play("IdleSide");
+                    break;
+                case LastLookDir.Right:
+                    _sr.flipX = true;
+                    _anim.Play("IdleSide");
+                    break;
+            }
+        }
     }
     public void OnCollisionEnter2D(Collision2D other)
     {
@@ -49,6 +112,7 @@ public class PlayerController : MonoBehaviour
 
             if (hit.collider != null)
             {
+                // 이동
                 _agent.SetDestination(hit.point);
                 _gameState.targetObject = clickedObject;
             }
