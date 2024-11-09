@@ -8,8 +8,18 @@ public abstract class MiniGameManager : MonoBehaviour
     [SerializeField] public GameStateSO _gameState;
     [Header("GID")]
     [SerializeField] public int gid;
-    public abstract void StartMiniGame();
-    public abstract void EndMiniGame();
+
+
+    static GameObject realObject;
+    public void StartMiniGame()
+    {
+        realObject = Instantiate(this.gameObject);
+    }
+    public void EndMiniGame()
+    {
+        if (realObject != null && realObject.activeSelf)
+            Destroy(realObject);
+    }
     public void OnSuccessMiniGame()
     {
         _gameState.MiniGameState = MiniGameState.Success;

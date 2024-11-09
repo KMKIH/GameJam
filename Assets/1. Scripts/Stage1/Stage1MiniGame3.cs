@@ -46,13 +46,4 @@ public class Stage1MiniGame3 : MiniGameManager
         Instantiate(_miniGame3State.foods[_miniGame3State.index], _miniGame3StateObj.transform);
 
     }
-
-    public override void StartMiniGame()
-    {
-        Instantiate(this.gameObject);
-    }
-    public override void EndMiniGame()
-    {
-        Destroy(this.gameObject);
-    }
 }

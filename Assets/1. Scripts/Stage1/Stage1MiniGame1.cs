@@ -7,7 +7,6 @@ public class Stage1MiniGame1 : MiniGameManager
     private int count = 0;
     private int countSuccess = 0;
 
-    static GameObject realObject;
 
     public int Count
     {
@@ -36,14 +35,5 @@ public class Stage1MiniGame1 : MiniGameManager
         {
             countSuccess = value;
         }
-    }
-    public override void StartMiniGame()
-    {
-        realObject = Instantiate(this.gameObject);
-    }
-    public override void EndMiniGame()
-    {
-        if(realObject != null && realObject.activeSelf)
-            Destroy(realObject);
     }
 }

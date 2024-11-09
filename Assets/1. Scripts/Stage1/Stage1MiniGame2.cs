@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class Stage1MiniGame2 : MiniGameManager
 {
+    Stage1MiniGame2 gameManager;
     [SerializeField] private Stage1MiniGame2StateSO _miniGame2State;
 
     void Start()
     {
+        gameManager = FindObjectOfType<Stage1MiniGame2>();
         _miniGame2State.ResetState();
-    }
-
-    public override void StartMiniGame()
-    {
-        Instantiate(this.gameObject);
-    }
-    public override void EndMiniGame()
-    {
-        Destroy(this.gameObject);
     }
 
     IEnumerator EndCurrentGame()
@@ -35,6 +28,7 @@ public class Stage1MiniGame2 : MiniGameManager
     }
     private void OnAddNumber(int val)
     {
+        if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
         if (!_miniGame2State.isControllerAvailable) return;
         if (_miniGame2State.channel.Length < 3)
         {

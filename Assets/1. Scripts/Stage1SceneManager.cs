@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 
@@ -9,6 +10,10 @@ public class Stage1SceneManager : MonoBehaviour
     [Header("Data")]
     [SerializeField] GameStateSO _gameState;
     [SerializeField] bool[] clearList = { false, false, false};
+
+    [Header("Objects")]
+    [SerializeField] SpriteRenderer[] objectImages;
+    [SerializeField] Sprite[] clearSprites;
     public bool[] ClearList
     {
         get { return clearList; }
@@ -54,6 +59,16 @@ public class Stage1SceneManager : MonoBehaviour
 
                 // 다음 스테이지 넘어가기
                 SceneManager.LoadScene("Stage2");
+            }
+
+            ///////////////////////////////////////////
+            // 오브젝트 변경
+            for(int i = 0; i < 3; i++)
+            {
+                if (clearList[i])
+                {
+                    objectImages[i].sprite = clearSprites[i];
+                }
             }
         }
     }

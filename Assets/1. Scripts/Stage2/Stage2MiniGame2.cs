@@ -18,13 +18,4 @@ public class Stage2MiniGame2 : MiniGameManager
             OnSuccessMiniGame();
         }
     }
-
-    public override void StartMiniGame()
-    {
-        Instantiate(this.gameObject);
-    }
-    public override void EndMiniGame()
-    {
-        Destroy(this.gameObject);
-    }
 }
