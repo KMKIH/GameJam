@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "State/Stage1/MiniGame3State", fileName = "Mini Game 3 State")]
+[CreateAssetMenu(menuName = "State/Stage1/Mini Game 3 State", fileName = "Mini Game 3 State")]
 public class Stage1MiniGame3StateSO : ScriptableObject
 {
     public int life;
