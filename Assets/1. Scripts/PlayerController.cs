@@ -52,12 +52,15 @@ public class PlayerController : MonoBehaviour
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
-        GameObject clickedObject = hit.collider.gameObject;
-
-        if (hit.collider != null)
+        if (hit)
         {
-            _agent.SetDestination(hit.point);
-            _gameState.targetObject = clickedObject;
+            GameObject clickedObject = hit.collider.gameObject;
+
+            if (hit.collider != null)
+            {
+                _agent.SetDestination(hit.point);
+                _gameState.targetObject = clickedObject;
+            }
         }
     }
 }
