@@ -13,8 +13,8 @@ public enum MiniGameState
 {
     OnGoing,
     Success,
-    Failed,
     Pause,
+    End,
 }
 [CreateAssetMenu(menuName = "State/GameState", fileName = "Game State")]
 public class GameStateSO : ScriptableObject
@@ -32,12 +32,19 @@ public class GameStateSO : ScriptableObject
             if (_miniGameState != value)
             {
                 _miniGameState = value;
-                OnMiniGameStateChanged(_miniGameState);
+                OnMiniGameStateChanged(targetMiniGame.gid, _miniGameState);
+                switch (MiniGameState)
+                {
+                    case MiniGameState.Success:
+                    case MiniGameState.End:
+                        playerState = PlayerState.FocusLeft;break;
+                }
             }
         }
     }
-    public event Action<MiniGameState> OnMiniGameStateChanged;
+    public event Action<int, MiniGameState> OnMiniGameStateChanged;
 
+    // MiniGame
     public void ResetGameState()
     {
         targetObject = null;
@@ -47,5 +54,15 @@ public class GameStateSO : ScriptableObject
     {
         MiniGameState = MiniGameState.OnGoing;
         targetMiniGame.StartMiniGame();
+    }
+    public void RestartMiniGame()
+    {
+        EndMiniGame();
+        StartMiniGame();
+    }
+    public void EndMiniGame()
+    {
+        MiniGameState = MiniGameState.End;
+        targetMiniGame.EndMiniGame();
     }
 }

@@ -126,9 +126,9 @@ public class PlayerController : MonoBehaviour
             }
 
             // 이동 요청
-            else if (hit)
+            else if (hit && _gameState.playerState == PlayerState.MiniGame)
             {
-                Debug.Log("Request Focus Left");
+                FindObjectOfType<GameManager>().TurnExitPopUp(true);
             }
         }
     }

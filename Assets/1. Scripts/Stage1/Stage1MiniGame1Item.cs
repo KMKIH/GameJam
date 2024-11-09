@@ -6,46 +6,55 @@ using UnityEngine.EventSystems;
 
 public class Stage1MiniGame1Item : MonoBehaviour
 {
+    [SerializeField] Stage1MiniGame1 gameManager;
     [SerializeField] private Stage1MiniGame1ItemSO _miniGameItemData;
+
+    public bool isRightItem;
+
     private RectTransform _targetUI;
-    private Camera _mainCamera;
     private bool _isGrabbed;
     private RectTransform _rectTransform;
-    private Rigidbody2D _rigidbody;
 
-    void Start()
+    void Awake()
     {
-        _mainCamera = Camera.main;
         _targetUI = GameObject.FindGameObjectsWithTag("Stage 1 Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
-        _rectTransform.anchoredPosition = new Vector3(_miniGameItemData.posX, _miniGameItemData.posY);
-        _rigidbody = GetComponent<Rigidbody2D>();
-        _rigidbody.simulated = false;
         _isGrabbed = false;
     }
 
     void Update()
     {
-        if (IsOverlapping(_targetUI))
-        {
-            Debug.Log($"{gameObject.name}가 {_targetUI.name}와 겹쳤습니다!");
-            Destroy(gameObject);
-        }
+        if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
+
+        // 오브젝트 잃었을때 대비
+        if(_targetUI == null) _targetUI = GameObject.FindGameObjectsWithTag("Stage 1 Mini Game Goal")[0].GetComponent<RectTransform>();
+        if(_rectTransform) _rectTransform = GetComponent<RectTransform>();
+
+        // Grab
         if (Input.GetMouseButtonDown(0))
         {
             OnClick();
         }
+        // Drag
         if (Input.GetMouseButton(0) && _isGrabbed)
         {
             _rectTransform.position = Input.mousePosition;
             return;
         }
-
+        // Drop
         if (Input.GetMouseButtonUp(0) && _isGrabbed)
         {
             _isGrabbed = false;
-            _rigidbody.simulated = true;
-            _rigidbody.velocity = new Vector3(0, -100f, 0);
+            if(IsOverlapping(_targetUI))
+            {
+                if (isRightItem)
+                {
+                    gameManager.CountSuccess++;
+                }
+                gameManager.Count++;
+                // Debug.Log($"{gameObject.name}가 {_targetUI.name}와 겹쳤습니다!");
+                Destroy(gameObject);
+            }
         }
     }
     

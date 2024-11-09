@@ -9,11 +9,10 @@ public class MiniGameTarget : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
-        Debug.Log(_gameState.targetObject);
+        if (FindObjectOfType<Stage1SceneManager>().ClearList[_miniGameManager.gid] == true) return;
+
         if (collision.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
         {
-            Debug.Log("Mini Game Start!");
             _gameState.playerState = PlayerState.MiniGame;
             _gameState.targetMiniGame = _miniGameManager;
             _gameState.StartMiniGame();

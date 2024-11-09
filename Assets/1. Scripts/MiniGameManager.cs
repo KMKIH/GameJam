@@ -4,15 +4,15 @@ using UnityEngine;
 
 public abstract class MiniGameManager : MonoBehaviour
 {
-    [SerializeField] GameStateSO _gameState;
+    [Header("Data")]
+    [SerializeField] public GameStateSO _gameState;
+    [Header("GID")]
+    [SerializeField] public int gid;
     public abstract void StartMiniGame();
     public abstract void EndMiniGame();
     public void OnSuccessMiniGame()
     {
         _gameState.MiniGameState = MiniGameState.Success;
-    }
-    public void OnFailedMiniGame()
-    {
-        _gameState.MiniGameState = MiniGameState.Failed;
+        EndMiniGame();
     }
 }

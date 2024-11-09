@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3cb040b2d2e4e5abeea7bc21269156, type: 3}
   m_Name: Stage 1 Mini Game 1 Item 2
   m_EditorClassIdentifier: 
-  posX: 200
-  posY: 100
+  posX: 0
+  posY: 0
   isRightItem: 1

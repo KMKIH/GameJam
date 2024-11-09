@@ -46,20 +46,37 @@ public class GameManager : MonoBehaviour
         restartPopUp.gameObject.SetActive(false);
         restartBtn.onClick.AddListener(OnClickRestart);
     }
+    public void TurnExitPopUp(bool on)
+    {
+        if (restartPopUp.activeSelf) return;
+        if(on)_gameState.MiniGameState = MiniGameState.Pause;
+        exitPopUp.SetActive(on);
+    }
+    public void TurnRestartPopUp(bool on)
+    {
+        if (exitPopUp.activeSelf) return;
+        if (on) _gameState.MiniGameState = MiniGameState.Pause;
+        restartPopUp.SetActive(on);
+    }
+
 
     // 나가기버튼 클릭
-    public void OnClickExit()
+    void OnClickExit()
     {
-
+        _gameState.MiniGameState = MiniGameState.End;
+        _gameState.EndMiniGame();
+        TurnExitPopUp(false);
     }
     // 취소버튼 클릭
-    public void OnClickCancel()
+    void OnClickCancel()
     {
-
+        _gameState.MiniGameState = MiniGameState.OnGoing;
+        TurnExitPopUp(false);
     }
     // 다시하기버튼 클릭
-    public void OnClickRestart()
+    void OnClickRestart()
     {
-
+        _gameState.RestartMiniGame();
+        TurnRestartPopUp(false);
     }
 }
