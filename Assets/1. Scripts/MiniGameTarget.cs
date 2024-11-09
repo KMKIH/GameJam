@@ -7,9 +7,11 @@ public class MiniGameTarget : MonoBehaviour
     [SerializeField] private GameStateSO _gameState;
     [SerializeField] private MiniGameManager _miniGameManager;
 
-    public void OnCollisionEnter2D(Collision2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
+        Debug.Log(collision.gameObject.tag);
+        Debug.Log(_gameState.targetObject);
+        if (collision.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
         {
             Debug.Log("Mini Game Start!");
             _gameState.playerState = PlayerState.MiniGame;
