@@ -1,6 +1,6 @@
 using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 [CustomEditor(typeof(VoidEventChannelSO))]
 public class VoidEventChannelSOEditor : Editor
 {
@@ -30,4 +30,4 @@ public class VoidEventChannelSOEditor : Editor
         }
     }
 }
-
+#endif
