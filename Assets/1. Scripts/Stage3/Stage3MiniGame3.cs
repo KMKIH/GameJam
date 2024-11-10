@@ -40,7 +40,7 @@ public class Stage3MiniGame3 : MiniGameManager
             _miniGameState.currentParagraph = EParagraph.End;
         }
 
-        if (_miniGameState.selectedEndParagraph != null || _miniGameState.selectedEndParagraph.Length > 0)
+        if (_miniGameState.selectedEndParagraph.Length > 0)
         {
             OnSuccessMiniGame();
         }

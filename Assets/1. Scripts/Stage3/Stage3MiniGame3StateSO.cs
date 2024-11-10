@@ -26,8 +26,8 @@ public class Stage3MiniGame3StateSO : ScriptableObject
     {
         buttonActive = true;
         currentParagraph = EParagraph.Start;
-        selectedStartParagraph = null;
-        selectedMiddleParagraph = null;
-        selectedEndParagraph = null;
+        selectedStartParagraph = "";
+        selectedMiddleParagraph = "";
+        selectedEndParagraph = "";
     }
 }
