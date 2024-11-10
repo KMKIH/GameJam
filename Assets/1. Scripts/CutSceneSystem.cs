@@ -11,7 +11,8 @@ public class CutSceneSystem : MonoBehaviour
     [SerializeField] private GameStateSO _gameState;
 
     // Cutscene
-    [SerializeField] Animator cutSceneAnimator;
+    [SerializeField] Image cutSceneBase;
+    [SerializeField] Sprite[] cutScene;
     [SerializeField] Transform dialogParents;
     [SerializeField] GameObject dialogBackground;
     [SerializeField] CutSceneDialog[] cutSceneDialogs;
@@ -21,44 +22,67 @@ public class CutSceneSystem : MonoBehaviour
     {
         _gameState.playerState = PlayerState.CutScene;
 
-        cutSceneAnimator.gameObject.SetActive(true);
+        cutSceneBase.gameObject.SetActive(true);
+        dialogParents.gameObject.SetActive(true);
         dialogBackground.SetActive(true);
 
-        await UniTask.WhenAll(CutScene(gid),CutSceneDialog(gid));
+        await UniTask.WhenAll(CutScene(gid));
 
         dialogBackground.SetActive(false);
-        cutSceneAnimator.gameObject.SetActive(false);
+        dialogParents.gameObject.SetActive(false);
+        cutSceneBase.gameObject.SetActive(false);
 
         _gameState.playerState = PlayerState.FocusLeft;
     }
     async UniTask CutScene(int gid)
     {
-        cutSceneAnimator.Play("CutScene" + gid);
+        var cutSceneIndex = 0;
+        var diaLogIndex = 0;
+
+        // ½ÃÀÛ
         while (true)
         {
             await UniTask.NextFrame();
-            if (cutSceneAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.95f)
+            if (Input.GetMouseButtonDown(0))
             {
+                cutSceneBase.sprite = cutScene[cutSceneIndex];
                 break;
             }
         }
-    }
-    async UniTask CutSceneDialog(int gid)
-    {
-        var s = Time.time;
-        var curTime = Time.time;
-        var dialogs = cutSceneDialogs.FirstOrDefault(x => x.gid == gid).dialogs;
-        foreach (var dialog in dialogs)
+        
+        while (true) // CutScene
         {
-            curTime = Time.time;
-            var startTime = dialog.startTime;
-            while (s + startTime > curTime)
+            diaLogIndex = 0;
+            await UniTask.NextFrame();
+            while (true) // Dialog
             {
-                curTime = Time.time;
                 await UniTask.NextFrame();
+                if (Input.GetMouseButtonDown(0) && diaLogIndex == cutSceneDialogs[cutSceneIndex].dialogs.Length)
+                {
+                    cutSceneIndex++;
+                    break;
+                }
+                if (Input.GetMouseButtonDown(0))
+                {
+                    var ui = Instantiate(dialogUIPrefab, dialogParents);
+                    var text = cutSceneDialogs[cutSceneIndex].dialogs[diaLogIndex++];
+                    ui.GetComponentInChildren<Text>().text = text;
+                }
             }
-            var ui = Instantiate(dialogUIPrefab, dialogParents);
-            ui.GetComponentInChildren<Text>().text = dialog.text;
+            if(cutSceneIndex == cutSceneDialogs.Length)
+            {
+                break;
+            }
+            cutSceneBase.sprite = cutScene[cutSceneIndex];
         }
+
+            RightFade.instance.FadeOut();
+        await LeftFade.instance.FadeOut();
+
+        cutSceneBase.gameObject.SetActive(false);
+        dialogParents.gameObject.SetActive(false);
+
+        RightFade.instance.FadeIn();
+        await LeftFade.instance.FadeIn();
     }
 }

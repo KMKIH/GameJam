@@ -12,11 +12,12 @@ public class MiniGameTarget : MonoBehaviour
         if (FindObjectOfType<StageSceneManager>().ClearList[_miniGameManager.gid] == true) return;
         if (FindObjectOfType<StageSceneManager>().ActiveList[_miniGameManager.gid] == false) return;
 
-        if (collision.gameObject.tag == "Player" && _gameState.targetObject == gameObject)
+        if (collision.gameObject.tag == "Player" && _gameState.targetObject == gameObject && _gameState.playerState == PlayerState.FocusLeft)
         {
             _gameState.playerState = PlayerState.MiniGame;
             _gameState.targetMiniGame = _miniGameManager;
             _gameState.StartMiniGame();
+            RightFade.instance.FadeIn();
         }
     }
 }

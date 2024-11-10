@@ -16,14 +16,14 @@ public class Stage1MiniGame2 : MiniGameManager
     IEnumerator EndCurrentGame()
     {
         _miniGame2State.isControllerAvailable = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         OnSuccessMiniGame();
     }
     IEnumerator ResetChannel()
     {
         _miniGame2State.isControllerAvailable = false;
         _miniGame2State.channel = "";
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.5f);
         _miniGame2State.isControllerAvailable = true;
     }
     private void OnAddNumber(int val)

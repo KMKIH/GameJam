@@ -12,11 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bd27d43e6b314419a2e7371b0380b2, type: 3}
   m_Name: Dialog_1
   m_EditorClassIdentifier: 
-  gid: 1
   dialogs:
-  - text: text1
-    startTime: 0
-  - text: text2
-    startTime: 2
-  - text: text3
-    startTime: 4
+  - "\uC8FC\uC778\uACF5: \u201C\uC774 \uAC00\uBC29\u2026 \uC5B4\uB9B4 \uB54C \uD56D\uC0C1
+    \uB4E4\uACE0 \uB2E4\uB154\uB358 \uC720\uCE58\uC6D0 \uAC00\uBC29\uC774\uC796\uC544.\u201D"

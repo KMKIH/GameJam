@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Stage2SceneManager : StageSceneManager
 {
+
+    [SerializeField] Portal portal;
     private void Start()
     {
+        portal.gameObject.SetActive(false);
         // Start Game
         switch (PlayerPrefs.GetInt("NewGame"))
         {
@@ -47,7 +50,7 @@ public class Stage2SceneManager : StageSceneManager
 
         //////////////////////////////////////////
         // Event
-        void CheckClearState(int gid, MiniGameState state)
+        async void CheckClearState(int gid, MiniGameState state)
         {
             if (state == MiniGameState.Success)
             {
@@ -65,9 +68,16 @@ public class Stage2SceneManager : StageSceneManager
                 if (clearList[0] && clearList[1] && clearList[2])
                 {
                     // 페이드 아웃 이후
+                    RightFade.instance.FadeOut();
+                    await LeftFade.instance.FadeOut();
+
+                    portal.gameObject.SetActive(true);
+
+                    RightFade.instance.FadeIn();
+                    await LeftFade.instance.FadeIn();
 
                     // 다음 스테이지 넘어가기
-                    SceneManager.LoadScene("Stage3");
+                    // SceneManager.LoadScene("Stage3");
                 }
             }
         }
@@ -76,7 +86,8 @@ public class Stage2SceneManager : StageSceneManager
             if (clearList[0] && clearList[1])
             {
                 ActiveList[2] = true;
-                objectImages[2].sprite = activeSprites[2];
+                if(clearList[2] == false)
+                    objectImages[2].sprite = activeSprites[2];
             }
         }
     }

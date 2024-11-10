@@ -46,7 +46,7 @@ public class Stage2MiniGame1 : MiniGameManager
         }
         if (isOnTheMilk)
         {
-            gaze += Time.deltaTime*3;
+            gaze += Time.deltaTime*10;
             slider.value = gaze / 100;
         }
 
@@ -57,8 +57,10 @@ public class Stage2MiniGame1 : MiniGameManager
             CancelTask();
             FindObjectOfType<GameManager>().TurnRestartPopUp(true);
         }
-
-
+    }
+    private void OnDestroy()
+    {
+        CancelTask();
     }
     private async void StartGame()
     {
@@ -70,12 +72,13 @@ public class Stage2MiniGame1 : MiniGameManager
                 anim.Play("Front");
                 var idleTime = UnityEngine.Random.Range(idleMinTime, idleMaxTime);
                 await UniTask.WaitForSeconds(idleTime);
-                
 
+                if (anim == null) break;
                 friendState = FriendState.Ready;
                 anim.Play("Ready");
                 await UniTask.WaitForSeconds(readyTIme);
 
+                if (anim == null) break;
                 friendState = FriendState.LookBack;
                 anim.Play("LookBack");
                 await UniTask.WaitForSeconds(readyTIme);

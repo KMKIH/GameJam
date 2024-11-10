@@ -28,7 +28,7 @@ public class Stage2MiniGame3Item : MonoBehaviour, IBeginDragHandler, IDragHandle
             _targetImage.color.r,
             _targetImage.color.g,
             _targetImage.color.b,
-            1 - 0.02f * _dragCount);
+            1 - 0.02f * _dragCount * 3);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -79,7 +79,7 @@ public class Stage2MiniGame3Item : MonoBehaviour, IBeginDragHandler, IDragHandle
     private void IncrementCounter()
     {
         _dragCount++;
-        if (_dragCount >= 50)
+        if (_dragCount >= 10)
         {
             m_gameClear.RaiseEvent();
         }

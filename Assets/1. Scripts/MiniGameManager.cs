@@ -16,10 +16,14 @@ public abstract class MiniGameManager : MonoBehaviour
     {
         realObject = Instantiate(this.gameObject);
     }
-    public void EndMiniGame()
+    public async void EndMiniGame()
     {
         if (realObject != null && realObject.activeSelf)
+        {
+            await RightFade.instance.FadeOutAsync();
             Destroy(realObject);
+            RightFade.instance.FadeIn();
+        }
     }
     public async void OnSuccessMiniGame()
     {

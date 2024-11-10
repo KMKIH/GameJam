@@ -7,8 +7,10 @@ using Cysharp.Threading.Tasks;
 
 public class Stage1SceneManager : StageSceneManager
 {
+    [SerializeField] Portal portal;
     private void Start()
     {
+        portal.gameObject.SetActive(false);
         // Start Game
         switch (PlayerPrefs.GetInt("NewGame"))
         {
@@ -58,14 +60,8 @@ public class Stage1SceneManager : StageSceneManager
         if(state == MiniGameState.Success)
         {
             // 해당하는 오브젝트 컬러입히기
-            ClearList[gid] = true;
-            for (int i = 0; i < 3; i++)
-            {
-                if (ClearList[i])
-                {
-                    objectImages[i].sprite = clearSprites[i];
-                }
-            }
+            clearList[gid] = true;
+            objectImages[gid].sprite = clearSprites[gid];
 
             // 1초 후에 클리어 체크
             await UniTask.WaitForSeconds(1);
@@ -76,8 +72,13 @@ public class Stage1SceneManager : StageSceneManager
                 RightFade.instance.FadeOut();
                 await LeftFade.instance.FadeOut();
 
+                portal.gameObject.SetActive(true);
+
+                RightFade.instance.FadeIn();
+                LeftFade.instance.FadeIn();
+
                 // 다음 스테이지 넘어가기
-                SceneManager.LoadScene("Stage2");
+                // SceneManager.LoadScene("Stage2");
             }
         }
     }
@@ -86,7 +87,8 @@ public class Stage1SceneManager : StageSceneManager
         if (clearList[0] && clearList[1])
         {
             ActiveList[2] = true;
-            objectImages[2].sprite = activeSprites[2];
+            if (clearList[2] == false)
+                objectImages[2].sprite = activeSprites[2];
         }
     }
 }
