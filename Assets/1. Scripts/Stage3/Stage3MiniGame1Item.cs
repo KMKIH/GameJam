@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private Stage3MiniGame1StateSO _miniGameState;
-    public float size;
     public float dragDistanceThreshold;
     private RectTransform _targetTransform;
     private RectTransform _rectTransform;
@@ -24,17 +23,6 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
         _rectTransform = GetComponent<RectTransform>();
         _dragCount = 0;
         _ratio = 1f;
-    }
-
-    void Update()
-    {
-        _ratio = 1 - 0.25f * _miniGameState.round;
-        if (_rectTransform.sizeDelta.x != size * _ratio ||
-            _rectTransform.sizeDelta.y != size * _ratio
-        )
-        {
-            _rectTransform.sizeDelta = new Vector2(size * _ratio, size * _ratio);
-        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

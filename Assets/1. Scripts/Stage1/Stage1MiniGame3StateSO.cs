@@ -17,7 +17,7 @@ public class Stage1MiniGame3StateSO : ScriptableObject
         life = 0;
         isMouseOpen = true;
         isReverse = false;
-        isBabyActive = true;
-        index = 0;
+        isBabyActive = true; 
+        index = Random.Range(0, foods.Count);
     }
 }

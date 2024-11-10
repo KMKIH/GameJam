@@ -91,7 +91,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
     {
         FindObjectOfType<Stage1MiniGame3Goal>().PlayAH();
         _miniGame3State.isMouseOpen = true;
-        _miniGame3State.index = (_miniGame3State.index + 1) % _miniGame3State.foods.Count;
+        _miniGame3State.index = Random.Range(0, _miniGame3State.foods.Count);
         m_foodEat.RaiseEvent();
         Destroy(gameObject);
     }

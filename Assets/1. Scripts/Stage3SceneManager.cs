@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Stage2SceneManager : StageSceneManager
+
+public class Stage3SceneManager : StageSceneManager
 {
     private void Start()
     {
@@ -67,7 +68,7 @@ public class Stage2SceneManager : StageSceneManager
                     // 페이드 아웃 이후
 
                     // 다음 스테이지 넘어가기
-                    SceneManager.LoadScene("Stage3");
+                    SceneManager.LoadScene("Ending");
                 }
             }
         }

@@ -13,7 +13,7 @@ public class Stage2MiniGame2 : MiniGameManager
 
     void Update()
     {
-        if (_miniGameState.solvedPuzzles == 6)
+        if (_miniGameState.solvedPuzzles == 3)
         {
             OnSuccessMiniGame();
         }

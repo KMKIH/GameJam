@@ -12,8 +12,8 @@ public class Stage2MiniGame1 : MiniGameManager
     [Header("Figure")]
     [SerializeField] Slider slider;
     [SerializeField] float gaze;
-    [SerializeField] float readyTIme =0.5f;
-    [SerializeField] float idleMinTime = 2f;
+    [SerializeField] float readyTIme =1f;
+    [SerializeField] float idleMinTime = 4f;
     [SerializeField] float idleMaxTime = 12f;
 
     [SerializeField] public bool isOnTheMilk;
