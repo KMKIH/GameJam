@@ -3623,6 +3623,8 @@ GameObject:
   - component: {fileID: 1579266095}
   - component: {fileID: 1579266098}
   - component: {fileID: 1579266097}
+  - component: {fileID: 1579266099}
+  - component: {fileID: 1579266100}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -3690,6 +3692,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cc533c73abec5984f99ca1d8d99c0123, type: 2}
   - {fileID: 11400000, guid: 82fa2b7e595308f4ca22b7359852aa61, type: 2}
   dialogUIPrefab: {fileID: 49326882926619765, guid: 28a5af45d2f45dd459e175d86a721f05, type: 3}
+  fadeOutDuration: 2
 --- !u!114 &1579266098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3722,6 +3725,135 @@ MonoBehaviour:
   - {fileID: 593234184, guid: 451914fca1ac767488b629ace7b3593f, type: 3}
   - {fileID: 654219554, guid: 451914fca1ac767488b629ace7b3593f, type: 3}
   portal: {fileID: 12264488}
+--- !u!82 &1579266099
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579266094}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: deb9f1d9400e83c4d99f9d61ceab7490, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1579266100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1579266094}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3ffccd90f756a64cbea6419ea302b77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameState: {fileID: 11400000, guid: b160135c72e2b4f3e8bd49940d7fdfe8, type: 2}
+  cutSceneBase: {fileID: 1796118110}
+  cutScene:
+  - {fileID: 584636963, guid: 7cbdd8f032dfc1445a50dd09fc2c34b2, type: 3}
+  - {fileID: 568237100, guid: 7cbdd8f032dfc1445a50dd09fc2c34b2, type: 3}
+  - {fileID: 1521242909, guid: 7cbdd8f032dfc1445a50dd09fc2c34b2, type: 3}
+  - {fileID: -1453402587, guid: 7cbdd8f032dfc1445a50dd09fc2c34b2, type: 3}
+  dialogParents: {fileID: 51582970}
+  dialogBackground: {fileID: 53449223}
+  cutSceneDialogs:
+  - {fileID: 11400000, guid: c18927cba3f12814db2ba1ded68d3598, type: 2}
+  - {fileID: 11400000, guid: 677824eda58ef3c459589ab863d10c04, type: 2}
+  - {fileID: 11400000, guid: cc533c73abec5984f99ca1d8d99c0123, type: 2}
+  - {fileID: 11400000, guid: 82fa2b7e595308f4ca22b7359852aa61, type: 2}
+  dialogUIPrefab: {fileID: 49326882926619765, guid: 28a5af45d2f45dd459e175d86a721f05, type: 3}
+  fadeOutDuration: 2
+  audioClips:
+  - {fileID: 8300000, guid: b824cce27e36b4b4e9bb81068ffeb096, type: 3}
+  - {fileID: 8300000, guid: a020737d6c6fe8346b9fe194298540db, type: 3}
+  - {fileID: 8300000, guid: d7ebd7bd38952a445b75115d4da79810, type: 3}
+  - {fileID: 8300000, guid: 75053cc2568ec8a48a8d63e7695e0bd3, type: 3}
 --- !u!1 &1628510419
 GameObject:
   m_ObjectHideFlags: 0

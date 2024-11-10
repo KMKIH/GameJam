@@ -11,12 +11,12 @@ public class CutSceneSystem : MonoBehaviour
     [SerializeField] private GameStateSO _gameState;
 
     // Cutscene
-    [SerializeField] Image cutSceneBase;
-    [SerializeField] Sprite[] cutScene;
-    [SerializeField] Transform dialogParents;
-    [SerializeField] GameObject dialogBackground;
-    [SerializeField] CutSceneDialog[] cutSceneDialogs;
-    [SerializeField] GameObject dialogUIPrefab;
+    [SerializeField] protected Image cutSceneBase;
+    [SerializeField] protected Sprite[] cutScene;
+    [SerializeField] protected Transform dialogParents;
+    [SerializeField] protected GameObject dialogBackground;
+    [SerializeField] protected CutSceneDialog[] cutSceneDialogs;
+    [SerializeField] protected GameObject dialogUIPrefab;
 
     public async UniTask StartCutScene(int gid)
     {
@@ -34,8 +34,9 @@ public class CutSceneSystem : MonoBehaviour
 
         _gameState.playerState = PlayerState.FocusLeft;
     }
-    async UniTask CutScene(int gid)
+    protected virtual async UniTask CutScene(int gid)
     {
+        audioSource.Play();
         var cutSceneIndex = 0;
         var diaLogIndex = 0;
 
@@ -76,7 +77,8 @@ public class CutSceneSystem : MonoBehaviour
             cutSceneBase.sprite = cutScene[cutSceneIndex];
         }
 
-            RightFade.instance.FadeOut();
+        StartFadeOut();
+        RightFade.instance.FadeOut();
         await LeftFade.instance.FadeOut();
 
         cutSceneBase.gameObject.SetActive(false);
@@ -84,5 +86,39 @@ public class CutSceneSystem : MonoBehaviour
 
         RightFade.instance.FadeIn();
         await LeftFade.instance.FadeIn();
+    }
+    //////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////
+
+    // 페이드아웃 시간 (초)
+    public float fadeOutDuration = 2.0f;
+    protected AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    // 페이드아웃 시작하는 함수
+    public void StartFadeOut()
+    {
+        StartCoroutine(FadeOutCoroutine());
+    }
+
+    private IEnumerator FadeOutCoroutine()
+    {
+        float startVolume = audioSource.volume;
+        float currentTime = 0;
+
+        while (currentTime < fadeOutDuration)
+        {
+            currentTime += Time.deltaTime;
+            audioSource.volume = Mathf.Lerp(startVolume, 0, currentTime / fadeOutDuration);
+            yield return null;
+        }
+
+        // 페이드아웃 완료 후 오디오 정지
+        audioSource.Stop();
     }
 }

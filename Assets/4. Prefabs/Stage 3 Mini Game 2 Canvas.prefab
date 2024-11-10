@@ -396,7 +396,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7958051119778964543, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
       propertyPath: m_Name
-      value: Stage 3 Mini Game 2 Canvas 1
+      value: Stage 3 Mini Game 2 Canvas
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2803757775004369818, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
@@ -441,5 +441,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameState: {fileID: 11400000, guid: b160135c72e2b4f3e8bd49940d7fdfe8, type: 2}
   gid: 1
-  _miniGameState: {fileID: 11400000, guid: bfdebd0ea58d84664bb3508d600bbb83, type: 2}
-  m_selected: {fileID: 11400000, guid: 7b536fa0c3cf5431b9573424b9626cc9, type: 2}
+  m_collided: {fileID: 11400000, guid: 7b536fa0c3cf5431b9573424b9626cc9, type: 2}

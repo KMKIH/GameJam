@@ -274,7 +274,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gameState: {fileID: 11400000, guid: b160135c72e2b4f3e8bd49940d7fdfe8, type: 2}
-  gid: 1
+  gid: 2
   _miniGameState: {fileID: 11400000, guid: bfdebd0ea58d84664bb3508d600bbb83, type: 2}
   m_selected: {fileID: 11400000, guid: 7b536fa0c3cf5431b9573424b9626cc9, type: 2}
 --- !u!1 &3431307239124079024
