@@ -35,12 +35,12 @@ public class Stage3MiniGame3Item : MonoBehaviour, IPointerClickHandler
 
         _paragraph = paragraphs[index];
         textUI.text = _paragraph;
+        textUI.gameObject.active = _miniGameState.buttonActive;
     }
 
     public void OnClick()
     {
         if (!_miniGameState.buttonActive) return;
-        Debug.Log(string.Format("{0}, {1}", _miniGameState.currentParagraph, _paragraph));
         if (_miniGameState.currentParagraph == EParagraph.Start)
         {
             _miniGameState.selectedStartParagraph = _paragraph;
