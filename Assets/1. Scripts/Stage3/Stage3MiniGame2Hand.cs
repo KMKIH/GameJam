@@ -4,26 +4,26 @@ using UnityEngine.EventSystems;
 public class Stage3MiniGame2Hand : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     [SerializeField] private VoidEventChannelSO m_collided;
-    private RectTransform _targetUI;
+    public RectTransform targetRectTransform;
     private RectTransform _rectTransform;
     private bool _isMovable = true;
 
     void Start()
     {
-        _targetUI = GameObject
-                .FindGameObjectsWithTag("Mini Game Target")[0]
-                .GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
-
     }
 
     void Update()
     {
-        if (IsOverlapping(_targetUI))
+        if (m_collided == null)
+        {
+            Debug.LogError("m_collided is not assigned!");
+            return;
+        }
+        if (IsOverlapping(targetRectTransform))
         {
             _isMovable = false;
-            _targetUI.gameObject.GetComponent<Rigidbody2D>().simulated = false;
-            _targetUI.gameObject.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            m_collided.RaiseEvent();
         }
     }
 
@@ -50,12 +50,17 @@ public class Stage3MiniGame2Hand : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         Rect rect1 = RectTransformToScreenSpace(_rectTransform);
         Rect rect2 = RectTransformToScreenSpace(other);
-        return rect1.Overlaps(rect2);
+
+       return rect1.xMin <= rect2.xMax && rect1.xMax >= rect2.xMin &&
+                          rect1.yMin <= rect2.yMax && rect1.yMax >= rect2.yMin;
     }
 
     Rect RectTransformToScreenSpace(RectTransform transform)
     {
-        Vector2 size = Vector2.Scale(transform.rect.size, transform.lossyScale);
-        return new Rect((Vector2)transform.position - (size * 0.5f), size);
+        Vector2 screenPointMin = RectTransformUtility.WorldToScreenPoint(null, transform.TransformPoint(transform.rect.min));
+        Vector2 screenPointMax = RectTransformUtility.WorldToScreenPoint(null, transform.TransformPoint(transform.rect.max));
+        Vector2 size = screenPointMax - screenPointMin;
+
+        return new Rect(screenPointMin, size);
     }
 }

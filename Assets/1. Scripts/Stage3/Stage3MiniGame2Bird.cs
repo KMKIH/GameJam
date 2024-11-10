@@ -9,12 +9,14 @@ enum Direction
 
 public class Stage3MiniGame2Bird : MonoBehaviour
 {
+    [SerializeField] private VoidEventChannelSO m_collided;
     private bool _isOutside;
     private Direction _direction;
     private RectTransform _rectTransform;
     private float _dropTime;
     private float _passedTime;
     private bool _isDropped;
+    private bool _isCollided = false;
     public float speed;
 
     void Start()
@@ -30,10 +32,11 @@ public class Stage3MiniGame2Bird : MonoBehaviour
 
     void Update()
     {
+        if (_isCollided) return;
         _passedTime += Time.deltaTime;
 
-        _isOutside = Mathf.Abs(_rectTransform.anchoredPosition.x) + _rectTransform.sizeDelta.x / 2f >= 480f ||
-            Mathf.Abs(_rectTransform.anchoredPosition.y) + _rectTransform.sizeDelta.y / 2f >= 540f;
+        _isOutside = Mathf.Abs(_rectTransform.anchoredPosition.x) - _rectTransform.sizeDelta.x / 2f >= 420f ||
+            Mathf.Abs(_rectTransform.anchoredPosition.y) - _rectTransform.sizeDelta.y / 2f >= 480f;
 
         if (_isOutside && _rectTransform.anchoredPosition.y < 0f)
         {
@@ -42,7 +45,7 @@ public class Stage3MiniGame2Bird : MonoBehaviour
         }
 
         if (_isDropped) return;
-        if (_isOutside && _rectTransform.anchoredPosition.y + _rectTransform.sizeDelta.y / 2f >= 540f)
+        if (_isOutside && _rectTransform.anchoredPosition.y - _rectTransform.sizeDelta.y / 2f >= 480f)
         {
             _direction = _direction == Direction.Left ? Direction.Right : Direction.Left;
             _rectTransform.anchoredPosition = new Vector2(
@@ -62,14 +65,24 @@ public class Stage3MiniGame2Bird : MonoBehaviour
             _rectTransform.anchoredPosition.x + velX * Time.deltaTime,
             _rectTransform.anchoredPosition.y + velY * Time.deltaTime);
 
-        if (!_isOutside &&
-            Mathf.Abs(_rectTransform.anchoredPosition.x) <= 480f - _rectTransform.anchoredPosition.x &&
+        if (!_isOutside && !_isCollided &&
+            Mathf.Abs(_rectTransform.anchoredPosition.x) <= 480f - _rectTransform.sizeDelta.x &&
             _passedTime >= _dropTime)
         {
             _isDropped = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             gameObject.GetComponent<Rigidbody2D>().simulated = true;
         }
+    }
+
+
+    private void OnEnable()
+    {
+        m_collided.OnEventRaised += OnObjCollided;
+    }
+    private void OnDisable()
+    {
+        m_collided.OnEventRaised -= OnObjCollided;
     }
 
     IEnumerator Reset()
@@ -80,6 +93,15 @@ public class Stage3MiniGame2Bird : MonoBehaviour
         _isDropped = false;
         _dropTime = Random.Range(5f, 15f);
         _rectTransform.anchoredPosition = new Vector2(-480f, 0f);
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+        gameObject.GetComponent<Rigidbody2D>().simulated = false;
+    }
+
+    public void OnObjCollided()
+    {
+        Debug.Log("Bird Event");
+        _isDropped = false;
+        _isCollided = true;
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponent<Rigidbody2D>().simulated = false;
     }
