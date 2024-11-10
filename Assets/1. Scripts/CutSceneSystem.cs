@@ -36,6 +36,7 @@ public class CutSceneSystem : MonoBehaviour
     }
     protected virtual async UniTask CutScene(int gid)
     {
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
         var cutSceneIndex = 0;
         var diaLogIndex = 0;
