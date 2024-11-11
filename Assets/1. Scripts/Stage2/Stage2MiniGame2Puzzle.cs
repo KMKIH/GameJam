@@ -12,17 +12,26 @@ public class Stage2MiniGame2Puzzle : MonoBehaviour, IBeginDragHandler, IDragHand
     private Vector3 _startPosition;
     private bool _isDraggable;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip grap;
+    [SerializeField] AudioClip drop;
+    SoundManager soundManager;
+
     void Start()
     {
         _isDraggable = true;
         _rectTransform = GetComponent<RectTransform>();
         _startPosition = _rectTransform.anchoredPosition;
+
+        soundManager = FindObjectOfType<SoundManager>();
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
         if (!_isDraggable) return;
         transform.position = Input.mousePosition;
+
+        soundManager.PlayEffect1(grap);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,6 +51,7 @@ public class Stage2MiniGame2Puzzle : MonoBehaviour, IBeginDragHandler, IDragHand
         {
             StartCoroutine(SnapBackToStartPosition());
         }
+        soundManager.PlayEffect1(drop);
     }
 
     private IEnumerator GoToPosition(Vector3 pos)

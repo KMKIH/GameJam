@@ -6,6 +6,7 @@ public class Stage2MiniGame3 : MiniGameManager
 
     private void OnEnable()
     {
+        m_gameClear.OnEventRaised -= OnGameClear;
         m_gameClear.OnEventRaised += OnGameClear;
     }
     private void OnDisable()

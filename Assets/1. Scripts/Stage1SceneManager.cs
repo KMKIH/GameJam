@@ -50,7 +50,7 @@ public class Stage1SceneManager : StageSceneManager
         LeftFade.instance.FadeIn();
         RightFade.instance.FadeIn();
         // 컷씬이 종료되면 배경음을 재생한다
-        _ = GetComponent<SoundManager>().PlayWithFadeOut(bgm,0.2f);
+        _ = GetComponent<SoundManager>().PlayWithFadeOut(bgm,0.2f,true);
     }
 
     //////////////////////////////////////////

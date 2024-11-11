@@ -91,6 +91,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: -17
   targetY: 42
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &5001374183443091107
 GameObject:
   m_ObjectHideFlags: 0
@@ -182,6 +184,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: 99999
   targetY: 99999
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &5667009414967243526
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +277,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: 99999
   targetY: 99999
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &5695360384610724733
 GameObject:
   m_ObjectHideFlags: 0
@@ -364,6 +370,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: 99999
   targetY: 99999
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &5956598180611908581
 GameObject:
   m_ObjectHideFlags: 0
@@ -455,6 +463,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: -20
   targetY: 200
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &7339114843589661752
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +556,8 @@ MonoBehaviour:
   _miniGameState: {fileID: 11400000, guid: 6b676abe9cf8f4f108ee3e284877780c, type: 2}
   targetX: -14
   targetY: -112
+  grap: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
+  drop: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
 --- !u!1 &8974649406852124121
 GameObject:
   m_ObjectHideFlags: 0

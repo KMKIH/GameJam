@@ -12,91 +12,93 @@ public class Stage2MiniGame1 : MiniGameManager
     [Header("Figure")]
     [SerializeField] Slider slider;
     [SerializeField] float gaze;
-    [SerializeField] float readyTIme =1f;
-    [SerializeField] float idleMinTime = 4f;
-    [SerializeField] float idleMaxTime = 12f;
 
+    [Header("for Debug")]
     [SerializeField] public bool isOnTheMilk;
     [SerializeField] public bool isUnderTheDesk;
-
-    private CancellationTokenSource _cancellationTokenSource;
     [Serializable]
     enum FriendState
     {
-        Idle, Ready, LookBack
+        None, Idle, Ready, LookBack
     }
     [SerializeField]
-    FriendState friendState = FriendState.Idle;
+    FriendState friendState = FriendState.None;
+
+    // Play
+    [Header("Figure")]
+    [SerializeField] float readyTime = 1f;
+    [SerializeField] float idleMinTime = 3f;
+    [SerializeField] float idleMaxTime = 8f;
+    float curTime;
+    float startTime;
+    float idleTime;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip turn;
+    SoundManager soundManager;
     private void Start()
     {
-        // 취소 토큰 소스를 초기화하고 UniTask 실행
-        _cancellationTokenSource = new CancellationTokenSource();
-        StartGame();
+        soundManager = FindObjectOfType<SoundManager>();
+
+        startTime = Time.time;
+        idleTime = UnityEngine.Random.Range(idleMinTime, idleMaxTime);
     }
 
     private void Update()
     {
         if (_gameState.MiniGameState != MiniGameState.OnGoing) return;
+        curTime = Time.time;
 
+        // Clear
         if (gaze >= 100)
         {
             Debug.Log("완료!");
-            CancelTask();
             OnSuccessMiniGame();
+            return;
         }
+
+        // Play
         if (isOnTheMilk)
         {
             gaze += Time.deltaTime*10;
             slider.value = gaze / 100;
         }
 
-        // 상태 확인
-        if(friendState == FriendState.LookBack && isUnderTheDesk == false)
+        // Friend
+        if (curTime - startTime > idleTime + readyTime*2)
         {
-            Debug.Log("걸렸다!");
-            CancelTask();
-            FindObjectOfType<GameManager>().TurnRestartPopUp(true);
+            friendState = FriendState.None;
+            startTime = curTime;
         }
-    }
-    private void OnDestroy()
-    {
-        CancelTask();
-    }
-    private async void StartGame()
-    {
-        try
+        else if (curTime - startTime > idleTime + readyTime)
         {
-            while (true)
+            if (friendState == FriendState.Ready)
+            {
+                friendState = FriendState.LookBack;
+                anim.Play("LookBack");
+            }
+            if (isUnderTheDesk == false)
+            {
+                Debug.Log("걸렸다!");
+                FindObjectOfType<GameManager>().TurnRestartPopUp(true);
+            }
+        }
+        else if (curTime - startTime > idleTime)
+        {
+            if (friendState == FriendState.Idle)
+            {
+                soundManager.PlayEffect2(turn);
+                friendState = FriendState.Ready;
+                anim.Play("Ready");
+            }
+        }
+        else if (curTime - startTime < idleTime)
+        {
+            if (friendState == FriendState.None)
             {
                 friendState = FriendState.Idle;
                 anim.Play("Front");
-                var idleTime = UnityEngine.Random.Range(idleMinTime, idleMaxTime);
-                await UniTask.WaitForSeconds(idleTime);
-
-                if (anim == null) break;
-                friendState = FriendState.Ready;
-                anim.Play("Ready");
-                await UniTask.WaitForSeconds(readyTIme);
-
-                if (anim == null) break;
-                friendState = FriendState.LookBack;
-                anim.Play("LookBack");
-                await UniTask.WaitForSeconds(readyTIme);
             }
-        }
-        catch (OperationCanceledException)
-        {
-            Debug.Log("작업이 취소되었습니다.");
-        }
-    }
-
-    private void CancelTask()
-    {
-        if (_cancellationTokenSource != null)
-        {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
-            _cancellationTokenSource = null;
         }
     }
 }

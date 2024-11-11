@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using UnityEngine;
 
@@ -24,8 +25,9 @@ public class SoundManager : MonoBehaviour
         cts?.Cancel();
         cts?.Dispose();
     }
-    public void PlayEffect1(AudioClip clip, float volumn = 1f)
+    public void PlayEffect1(AudioClip clip, float volumn = 1f, bool isLoop = false)
     {
+        audioSource_Effect1.loop = isLoop;
         audioSource_Effect1.volume = volumn;
         audioSource_Effect1.clip = clip;
         audioSource_Effect1.Play();
@@ -34,8 +36,9 @@ public class SoundManager : MonoBehaviour
     {
         audioSource_Effect1?.Stop();
     }
-    public void PlayEffect2(AudioClip clip, float volumn = 1f)
+    public void PlayEffect2(AudioClip clip, float volumn = 1f, bool isLoop = false)
     {
+        audioSource_Effect1.loop = isLoop;
         audioSource_Effect2.volume = volumn;
         audioSource_Effect2.clip = clip;
         audioSource_Effect2.Play();
@@ -44,8 +47,9 @@ public class SoundManager : MonoBehaviour
     {
         audioSource_Effect2?.Stop();
     }
-    public async UniTask PlayWithFadeOut(AudioClip clip, float volumn = 1f)
+    public async UniTask PlayWithFadeOut(AudioClip clip, float volumn = 1f, bool isLoop = false)
     {
+        audioSource_Bgm.loop = isLoop;
         audioSource_Bgm.volume = volumn;
         if (!audioSource_Bgm.isPlaying)
         {

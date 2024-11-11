@@ -4,91 +4,89 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Stage2SceneManager : StageSceneManager
 {
-
+    [Header("Obect")]
     [SerializeField] Portal portal;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip bgm;
+    AudioSource audioSource;
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
-        portal.gameObject.SetActive(false);
+        // 게임 시작 시 Fade In
+        FullFade.instance.FadeIn();
+
         // Start Game
-        switch (PlayerPrefs.GetInt("NewGame"))
-        {
-            case 0:
-                NewGame();
-                break;
-            case 1:
-                Resume();
-                break;
-        }
-        // Set Active
+        StartCutScene();
+
+        // 값 설정
         ActiveList[0] = true;
         ActiveList[1] = true;
         ActiveList[2] = false;
-
         for (int i = 0; i < 3; i++)
         {
-            if (activeList[i] == false)
-            {
-                objectImages[i].sprite = inActiveSprites[i];
-            }
-            else
-            {
-                objectImages[i].sprite = activeSprites[i];
-            }
+            if (activeList[i] == false) objectImages[i].sprite = inActiveSprites[i];
+            else objectImages[i].sprite = activeSprites[i];
+        }
+        portal.gameObject.SetActive(false);
 
-            // Event 연결
-            _gameState.OnMiniGameStateChanged += CheckClearState;
-            _gameState.OnMiniGameStateChanged += ActiveObject;
-        }
-        async void NewGame()
-        {
-            await FindObjectOfType<CutSceneSystem>().StartCutScene(1);
-        }
-        void Resume()
-        {
-            // TODO: PlayerPref에 따
-        }
+        // Event 연결
+        _gameState.OnMiniGameStateChanged += CheckClearState;
+        _gameState.OnMiniGameStateChanged += ActiveObject;
+    }
+    async void StartCutScene()
+    {
+        await FindObjectOfType<CutSceneSystem>().StartCutScene(1);
 
-        //////////////////////////////////////////
-        // Event
-        async void CheckClearState(int gid, MiniGameState state)
+        LeftFade.instance.FadeOut(0.3f);
+        await RightFade.instance.FadeOutAsync(0.3f);
+
+        LeftFade.instance.FadeIn();
+        RightFade.instance.FadeIn();
+        // 컷씬이 종료되면 배경음을 재생한다
+        _ = GetComponent<SoundManager>().PlayWithFadeOut(bgm, 0.3f,true);
+    }
+
+    //////////////////////////////////////////
+    // Event
+    async void CheckClearState(int gid, MiniGameState state)
+    {
+        if (state == MiniGameState.Success)
         {
-            if (state == MiniGameState.Success)
+            // 해당하는 오브젝트 컬러입히기
+            ClearList[gid] = true;
+            for (int i = 0; i < 3; i++)
             {
-                // 해당하는 오브젝트 컬러입히기
-                ClearList[gid] = true;
-                for (int i = 0; i < 3; i++)
+                if (clearList[i])
                 {
-                    if (clearList[i])
-                    {
-                        objectImages[i].sprite = clearSprites[i];
-                    }
-                }
-
-                // 0.5초 후에 클리어 체크
-                if (clearList[0] && clearList[1] && clearList[2])
-                {
-                    // 페이드 아웃 이후
-                    RightFade.instance.FadeOut();
-                    await LeftFade.instance.FadeOut();
-
-                    portal.gameObject.SetActive(true);
-
-                    RightFade.instance.FadeIn();
-                    await LeftFade.instance.FadeIn();
-
-                    // 다음 스테이지 넘어가기
-                    // SceneManager.LoadScene("Stage3");
+                    objectImages[i].sprite = clearSprites[i];
                 }
             }
-        }
-        void ActiveObject(int gid, MiniGameState state)
-        {
-            if (clearList[0] && clearList[1])
+
+            // 0.5초 후에 클리어 체크
+            if (clearList[0] && clearList[1] && clearList[2])
             {
-                ActiveList[2] = true;
-                if(clearList[2] == false)
-                    objectImages[2].sprite = activeSprites[2];
+                // 페이드 아웃 이후
+                RightFade.instance.FadeOut();
+                await LeftFade.instance.FadeOutAsync();
+
+                portal.gameObject.SetActive(true);
+
+                RightFade.instance.FadeIn();
+                await LeftFade.instance.FadeInAsync();
             }
+        }
+    }
+    void ActiveObject(int gid, MiniGameState state)
+    {
+        if (clearList[0] && clearList[1])
+        {
+            ActiveList[2] = true;
+            if (clearList[2] == false)
+                objectImages[2].sprite = activeSprites[2];
         }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class Stage2MiniGame2 : MiniGameManager
 {
     [SerializeField] private Stage2MiniGame2SO _miniGameState;
+    private bool _isClear = false;
 
     void Start()
     {
@@ -13,8 +14,9 @@ public class Stage2MiniGame2 : MiniGameManager
 
     void Update()
     {
-        if (_miniGameState.solvedPuzzles == 3)
+        if (_miniGameState.solvedPuzzles == 3 && _isClear == false)
         {
+            _isClear = true;
             OnSuccessMiniGame();
         }
     }
