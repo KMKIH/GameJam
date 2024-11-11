@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class WorldObjectSorting : MonoBehaviour
 {
-    SpriteRenderer sr;
-    private void Awake()
-    {
-        sr = GetComponent<SpriteRenderer>();
-    }
+    [SerializeField]SpriteRenderer sr;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        sr.sortingOrder = 1;
+        if (collision.gameObject.tag == "Player")
+            sr.sortingOrder = 1;
     }
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        sr.sortingOrder = 0;
+        if(collision.gameObject.tag == "Player")
+            sr.sortingOrder = 0;
     }
 }

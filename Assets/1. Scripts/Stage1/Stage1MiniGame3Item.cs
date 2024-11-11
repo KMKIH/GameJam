@@ -12,12 +12,17 @@ public class Stage1MiniGame3Item : MonoBehaviour
     private RectTransform _rectTransform;
     private Vector2 _originalPos;
 
+    [Header("Sound")]
+    SoundManager soundManager;
+
     void Start()
     {
         gameManager = FindObjectOfType<Stage1MiniGame3>();
         _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
         _originalPos = _rectTransform.anchoredPosition;
+
+        soundManager = FindObjectOfType<SoundManager>();
     }
     void Update()
     {
@@ -42,6 +47,7 @@ public class Stage1MiniGame3Item : MonoBehaviour
         // 입이 닫혀 있다면 Back
         if (!_miniGame3State.isReverse && !_miniGame3State.isMouseOpen && RectTransformToScreenSpace(_rectTransform).xMin <= -770f)
         {
+            FindObjectOfType<Stage1MiniGame3Goal>().PlayReject();
             _miniGame3State.isReverse = true;
         }
 
@@ -89,8 +95,6 @@ public class Stage1MiniGame3Item : MonoBehaviour
 
     void EatFood()
     {
-        FindObjectOfType<Stage1MiniGame3Goal>().PlayAH();
-        _miniGame3State.isMouseOpen = true;
         _miniGame3State.index = Random.Range(0, _miniGame3State.foods.Count);
         m_foodEat.RaiseEvent();
         Destroy(gameObject);

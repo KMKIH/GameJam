@@ -15,7 +15,6 @@ public class Stage1MiniGame3StateSO : ScriptableObject
     public void ResetState()
     {
         life = 0;
-        isMouseOpen = true;
         isReverse = false;
         isBabyActive = true; 
         index = Random.Range(0, foods.Count);

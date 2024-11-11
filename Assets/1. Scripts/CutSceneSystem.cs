@@ -1,53 +1,67 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 
+// 컷씬에 맞춰 음악까지 진행
 public class CutSceneSystem : MonoBehaviour
 {
-    // gameState
+    // GameState
     [SerializeField] private GameStateSO _gameState;
 
     // Cutscene
+    [Header("CutScene")]
+    [SerializeField] protected GameObject cutSceneObject;
     [SerializeField] protected Image cutSceneBase;
-    [SerializeField] protected Sprite[] cutScene;
+    [SerializeField] protected Sprite[] cutScene; // 추후 여러 컷씬을 넣는 경우 2차원배열이든 Dictionary로 변경해야한다
+    [Header("Dialog")]
     [SerializeField] protected Transform dialogParents;
     [SerializeField] protected GameObject dialogBackground;
-    [SerializeField] protected CutSceneDialog[] cutSceneDialogs;
+    [SerializeField] protected CutSceneDialog[] cutSceneDialogs; // 추후 여러 컷씬을 넣는 경우 2차원배열이든 Dictionary로 변경해야한다
     [SerializeField] protected GameObject dialogUIPrefab;
-
+    [Header("Audio")]
+    [SerializeField] AudioClip[] audioClips;
+    SoundManager soundManager;
+    private void Awake()
+    {
+        soundManager = GetComponent<SoundManager>();
+    }
     public async UniTask StartCutScene(int gid)
     {
         _gameState.playerState = PlayerState.CutScene;
 
-        cutSceneBase.gameObject.SetActive(true);
+        // 컷씬 관련 오브젝트 ON
+        cutSceneObject.SetActive(true);
         dialogParents.gameObject.SetActive(true);
         dialogBackground.SetActive(true);
 
         await UniTask.WhenAll(CutScene(gid));
 
+        // 컷씬 관련 오브젝트 OFF
         dialogBackground.SetActive(false);
         dialogParents.gameObject.SetActive(false);
-        cutSceneBase.gameObject.SetActive(false);
+        cutSceneObject.SetActive(false);
 
         _gameState.playerState = PlayerState.FocusLeft;
     }
     protected virtual async UniTask CutScene(int gid)
     {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.Play();
         var cutSceneIndex = 0;
         var diaLogIndex = 0;
 
-        // ����
+        // 시작
+        LeftFade.instance.FadeOut(0);
         while (true)
         {
             await UniTask.NextFrame();
             if (Input.GetMouseButtonDown(0))
             {
+                LeftFade.instance.FadeIn();
                 cutSceneBase.sprite = cutScene[cutSceneIndex];
+                if (cutSceneIndex < audioClips.Length && audioClips[cutSceneIndex] != null)
+                {
+                    _ = soundManager.PlayWithFadeOut(audioClips[cutSceneIndex]);
+                }
                 break;
             }
         }
@@ -71,55 +85,14 @@ public class CutSceneSystem : MonoBehaviour
                     ui.GetComponentInChildren<Text>().text = text;
                 }
             }
-            if(cutSceneIndex == cutSceneDialogs.Length)
-            {
-                break;
-            }
+
+            // CutScene 변경
+            if(cutSceneIndex == cutSceneDialogs.Length) break;
             cutSceneBase.sprite = cutScene[cutSceneIndex];
+            if (cutSceneIndex < audioClips.Length && audioClips[cutSceneIndex] != null)
+            {
+                _ = soundManager.PlayWithFadeOut(audioClips[cutSceneIndex]);
+            }
         }
-
-        StartFadeOut();
-        RightFade.instance.FadeOut();
-        await LeftFade.instance.FadeOutAsync();
-
-        cutSceneBase.gameObject.SetActive(false);
-        dialogParents.gameObject.SetActive(false);
-
-        RightFade.instance.FadeIn();
-        await LeftFade.instance.FadeInAsync();
-    }
-    //////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////
-
-    // ���̵�ƿ� �ð� (��)
-    public float fadeOutDuration = 2.0f;
-    protected AudioSource audioSource;
-
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
-
-    // ���̵�ƿ� �����ϴ� �Լ�
-    public void StartFadeOut()
-    {
-        StartCoroutine(FadeOutCoroutine());
-    }
-
-    private IEnumerator FadeOutCoroutine()
-    {
-        float startVolume = audioSource.volume;
-        float currentTime = 0;
-
-        while (currentTime < fadeOutDuration)
-        {
-            currentTime += Time.deltaTime;
-            audioSource.volume = Mathf.Lerp(startVolume, 0, currentTime / fadeOutDuration);
-            yield return null;
-        }
-
-        // ���̵�ƿ� �Ϸ� �� ����� ����
-        audioSource.Stop();
     }
 }

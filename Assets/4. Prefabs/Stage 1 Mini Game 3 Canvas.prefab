@@ -1,5 +1,84 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2467934088201708510
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2991496498955425343}
+  - component: {fileID: 798483122883937092}
+  - component: {fileID: 4927194666351636012}
+  m_Layer: 5
+  m_Name: Notice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2991496498955425343
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467934088201708510}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1741250627285021424}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 100}
+  m_Pivot: {x: 0.5, y: 1}
+--- !u!222 &798483122883937092
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467934088201708510}
+  m_CullTransparentMesh: 1
+--- !u!114 &4927194666351636012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2467934088201708510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: bc01a1b0b9e5949d18a678d5f64d55ca, type: 3}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 5
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "\uD074\uB9AD\uD558\uB294 \uB3D9\uC548 \uC785\uC774 \uBC8C\uC5B4\uC9D1\uB2C8\uB2E4"
 --- !u!1 &3000862515055933253
 GameObject:
   m_ObjectHideFlags: 0
@@ -68,11 +147,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3196290180781654647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -400, y: -199.75}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -100, y: 0}
   m_SizeDelta: {x: 430.03656, y: 435}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7210786381422100009
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -160,11 +239,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3196290180781654647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -200, y: -199.75}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 100, y: 0}
   m_SizeDelta: {x: 430.03656, y: 435}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5078212243845987334
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -252,11 +331,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3196290180781654647}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -300, y: -199.75}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 430.03656, y: 435}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2222034521026220024
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -401,6 +480,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGame3State: {fileID: 11400000, guid: 83d9c0328898640cd8beb7e4081df2ad, type: 2}
+  sound_AH: {fileID: 8300000, guid: b7add7d3702df2c40bc3bdc12561a30d, type: 3}
+  sound_UMUL: {fileID: 8300000, guid: c640046c2da5f78448c1e1005ed397c9, type: 3}
+  sound_Reject: {fileID: 8300000, guid: e175e8a94d493d34c82bc1eaff2b9479, type: 3}
 --- !u!95 &5919065176483574352
 Animator:
   serializedVersion: 5
@@ -455,11 +537,11 @@ RectTransform:
   - {fileID: 1556773728946064873}
   m_Father: {fileID: 1741250627285021424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 430}
-  m_SizeDelta: {x: 369.5144, y: 399.5}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0, y: -150}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!1001 &2840482656329953268
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -572,6 +654,7 @@ PrefabInstance:
     - {fileID: 4100680307952594450, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3314180717031919839, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
+    - {fileID: 7906449610235832054, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 4557996682990296324, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
       insertIndex: -1
@@ -582,6 +665,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4557996682990296324, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3196290180781654647}
+    - targetCorrespondingSourceObject: {fileID: 4557996682990296324, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2991496498955425343}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6939985085055270732, guid: 01a9a002593e34928816c3fd07e6dd6c, type: 3}
       insertIndex: -1

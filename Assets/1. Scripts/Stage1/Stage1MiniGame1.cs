@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Stage1MiniGame1 : MiniGameManager
 {
     private int count = 0;
     private int countSuccess = 0;
-
     public int Count
     {
         get { return count; }
@@ -34,5 +34,12 @@ public class Stage1MiniGame1 : MiniGameManager
         {
             countSuccess = value;
         }
+    }
+
+
+    [SerializeField] Text _countText;
+    private void Update()
+    {
+        _countText.text = $"{count} / {4}";
     }
 }

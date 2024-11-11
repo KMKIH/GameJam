@@ -2,23 +2,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems; 
+using UnityEngine.EventSystems;
+using Unity.VisualScripting;
 
 public class Stage1MiniGame1Item : MonoBehaviour
 {
     [SerializeField] Stage1MiniGame1 gameManager;
-    [SerializeField] private Stage1MiniGame1ItemSO _miniGameItemData;
 
     public bool isRightItem;
+
+    private bool _inOnTheBag = false;
 
     private RectTransform _targetUI;
     private bool _isGrabbed;
     private RectTransform _rectTransform;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip _grapSound;
+    [SerializeField] AudioClip _dropSound;
+    SoundManager _soundManager;
+    [SerializeField] float effectVolume = 0.5f;
+
     void Awake()
     {
         _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
+        _soundManager = FindObjectOfType<SoundManager>();
         _isGrabbed = false;
     }
 
@@ -26,14 +35,11 @@ public class Stage1MiniGame1Item : MonoBehaviour
     {
         if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
 
-        // 오브젝트 잃었을때 대비
-        if(_targetUI == null) _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
-        if(_rectTransform) _rectTransform = GetComponent<RectTransform>();
-
         // Grab
         if (Input.GetMouseButtonDown(0))
         {
             OnClick();
+            if (_isGrabbed) _soundManager.PlayEffect1(_grapSound, effectVolume);
         }
         // Drag
         if (Input.GetMouseButton(0) && _isGrabbed)
@@ -44,6 +50,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
         // Drop
         if (Input.GetMouseButtonUp(0) && _isGrabbed)
         {
+            _soundManager.PlayEffect1(_dropSound, effectVolume);
             _isGrabbed = false;
             if(IsOverlapping(_targetUI))
             {
@@ -57,7 +64,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
             }
         }
     }
-    
+
     private void OnClick()
     {
         GraphicRaycaster raycaster = GetComponentInParent<GraphicRaycaster>();
@@ -79,7 +86,6 @@ public class Stage1MiniGame1Item : MonoBehaviour
             }
         }
     }
-
     bool IsOverlapping(RectTransform other)
     {
         Rect rect1 = RectTransformToScreenSpace(_rectTransform);

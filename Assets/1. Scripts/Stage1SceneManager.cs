@@ -7,50 +7,50 @@ using Cysharp.Threading.Tasks;
 
 public class Stage1SceneManager : StageSceneManager
 {
+    [Header("Obect")]
     [SerializeField] Portal portal;
+
+    [Header("Audio")]
+    [SerializeField] AudioClip bgm;
+    AudioSource audioSource;
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private void Start()
     {
-        portal.gameObject.SetActive(false);
+        // 게임 시작 시 Fade In
+        FullFade.instance.FadeIn();
+
         // Start Game
-        switch (PlayerPrefs.GetInt("NewGame"))
-        {
-            case 0:
-                NewGame();
-                break;
-            case 1:
-                Resume();
-                break;
-        }
+        StartCutScene();
 
-        // Set Active
-        ActiveList[0] = true;
+        // 값 설정
+        ActiveList[0] = false;
         ActiveList[1] = true;
-        ActiveList[2] = false;
-
+        ActiveList[2] = true;
         for (int i = 0; i < 3; i++)
         {
-            if (activeList[i] == false)
-            {
-                objectImages[i].sprite = inActiveSprites[i];
-            }
-            else
-            {
-                objectImages[i].sprite = activeSprites[i];
-            }
+            if (activeList[i] == false) objectImages[i].sprite = inActiveSprites[i];
+            else objectImages[i].sprite = activeSprites[i];
         }
+        portal.gameObject.SetActive(false);
 
         // Event 연결
         _gameState.OnMiniGameStateChanged += CheckClearState;
         _gameState.OnMiniGameStateChanged += ActiveObject;
-
     }
-    async void NewGame()
+    async void StartCutScene()
     {
         await FindObjectOfType<CutSceneSystem>().StartCutScene(1);
-    }
-    void Resume()
-    {
-        // TODO: PlayerPref에 따
+
+        LeftFade.instance.FadeOut(0.3f);
+        await RightFade.instance.FadeOutAsync(0.3f);
+
+        LeftFade.instance.FadeIn();
+        RightFade.instance.FadeIn();
+        // 컷씬이 종료되면 배경음을 재생한다
+        _ = GetComponent<SoundManager>().PlayWithFadeOut(bgm,0.2f);
     }
 
     //////////////////////////////////////////
@@ -70,25 +70,22 @@ public class Stage1SceneManager : StageSceneManager
             {
                 // 페이드 아웃 이후
                 RightFade.instance.FadeOut();
-                await LeftFade.instance.FadeOut();
+                await LeftFade.instance.FadeOutAsync();
 
                 portal.gameObject.SetActive(true);
 
                 RightFade.instance.FadeIn();
                 LeftFade.instance.FadeIn();
-
-                // 다음 스테이지 넘어가기
-                // SceneManager.LoadScene("Stage2");
             }
         }
     }
     void ActiveObject(int gid, MiniGameState state)
     {
-        if (clearList[0] && clearList[1])
+        if (clearList[1] && clearList[2])
         {
-            ActiveList[2] = true;
-            if (clearList[2] == false)
-                objectImages[2].sprite = activeSprites[2];
+            ActiveList[0] = true;
+            if (clearList[0] == false)
+                objectImages[0].sprite = activeSprites[0];
         }
     }
 }

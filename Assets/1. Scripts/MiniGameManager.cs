@@ -16,19 +16,20 @@ public abstract class MiniGameManager : MonoBehaviour
     {
         realObject = Instantiate(this.gameObject);
     }
-    public async void EndMiniGame()
+    public virtual void EndMiniGame()
     {
         if (realObject != null && realObject.activeSelf)
         {
-            await RightFade.instance.FadeOutAsync();
+            RightFade.instance.FadeIn(1);
             Destroy(realObject);
-            RightFade.instance.FadeIn();
         }
     }
     public async void OnSuccessMiniGame()
     {
         _gameState.MiniGameState = MiniGameState.Success;
-        await UniTask.WaitForSeconds(1);
+
+        // 성공 이미지 띄우기
+        await RightFade.instance.FadeOutAsync(1, "Clear");
         EndMiniGame();
     }
 }

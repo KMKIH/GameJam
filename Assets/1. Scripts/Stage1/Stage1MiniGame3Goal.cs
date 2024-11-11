@@ -7,54 +7,64 @@ using UnityEngine.EventSystems;
 public class Stage1MiniGame3Goal : MonoBehaviour
 {
     [SerializeField] private Stage1MiniGame3StateSO _miniGame3State;
+
+    SoundManager soundManager;
     Animator anim;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip sound_AH;
+    [SerializeField] AudioClip sound_UMUL;
+    [SerializeField] AudioClip sound_Reject;
+    bool isUMUL = false;
+    
     private void Awake()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         anim = GetComponent<Animator>();
+
+        _miniGame3State.isMouseOpen = false;
     }
     void Update()
     {
         if (Input.GetMouseButtonDown(0) && _miniGame3State.isBabyActive)
         {
-            _miniGame3State.isMouseOpen = !_miniGame3State.isMouseOpen;
-            if (_miniGame3State.isMouseOpen)
+            if (isUMUL) isUMUL = false;
+            _miniGame3State.isMouseOpen = true;
+            PlayAH();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _miniGame3State.isMouseOpen = false;
+            if (isUMUL)
             {
-                anim.Play("AH");
+                isUMUL = false;
             }
             else
             {
                 anim.Play("UM");
             }
-            // OnClick();
         }
+    }
+    private void OnDestroy()
+    {
+        soundManager.StopEffect1();
     }
     public void PlayEat()
     {
+        isUMUL = true;
         anim.Play("UMUL");
+        soundManager.StopEffect1();
+        soundManager.PlayEffect1(sound_UMUL);
     }
-    public void PlayAH()
+    void PlayAH()
     {
         anim.Play("AH");
+        soundManager.StopEffect1();
+        soundManager.PlayEffect1(sound_AH);
     }
-    private void OnClick()
+    public void PlayReject()
     {
-        GraphicRaycaster raycaster = GetComponentInParent<GraphicRaycaster>();
-        
-        if (raycaster != null)
-        {
-            PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;
-            List<RaycastResult> results = new List<RaycastResult>();
-
-            raycaster.Raycast(pointerEventData, results);
-
-            foreach (RaycastResult result in results)
-            {
-                if (result.gameObject == gameObject)
-                {
-                    _miniGame3State.isMouseOpen = !_miniGame3State.isMouseOpen;
-                }
-            }
-        }
+        soundManager.StopEffect1();
+        soundManager.PlayEffect1(sound_Reject);
     }
 }

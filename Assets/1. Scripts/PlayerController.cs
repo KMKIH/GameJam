@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     private Animator _anim;
     private SpriteRenderer _sr;
 
+    private bool _isWalking;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip[] walkSounds;
+    [SerializeField] float _soundInterval = 0.5f;
+    float _lastSoundTime = 0f;
+    SoundManager _soundManager;
+
     enum LastLookDir
     {
         Front, Back, Left, Right
@@ -25,11 +33,10 @@ public class PlayerController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _agent.updateRotation = false;
         _agent.updateUpAxis = false;
-        _agent.speed = 10;
-        _agent.acceleration = 20;
 
         _anim = GetComponent<Animator>();
         _sr = GetComponent<SpriteRenderer>();
+        _soundManager = FindObjectOfType<SoundManager>();   
     }
 
     private void Update()
@@ -39,11 +46,11 @@ public class PlayerController : MonoBehaviour
             MoveToClickPosition();
         }
 
-
-
         // 애니메이션
         if (_agent.hasPath)
         {
+            _isWalking = true;
+
             var xDir = _agent.velocity.normalized.x;
             var yDir = _agent.velocity.normalized.y;
             if (Mathf.Abs(xDir) > Mathf.Abs(yDir))
@@ -73,6 +80,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            _isWalking = false;
+
             switch (lookDir)
             {
                 case LastLookDir.Front:
@@ -91,6 +100,17 @@ public class PlayerController : MonoBehaviour
                     break;
             }
         }
+
+        // Sound
+        if (_isWalking)
+        {
+            var curTime = Time.time;
+            if(curTime > _lastSoundTime + _soundInterval)
+            {
+                _lastSoundTime = curTime;
+                _soundManager.PlayEffect1(walkSounds[Random.Range(0, walkSounds.Length)],0.4f);
+            }
+        }
     }
     public void OnCollisionEnter2D(Collision2D other)
     {
@@ -100,7 +120,6 @@ public class PlayerController : MonoBehaviour
             _agent.velocity = Vector3.zero;
         }
     }
-
     private void MoveToClickPosition()
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -119,9 +138,15 @@ public class PlayerController : MonoBehaviour
 
                 // clicked Object 저장
                 GameObject clickedObject = hit.collider.gameObject;
-                if (clickedObject.TryGetComponent(out NavMeshModifier navMeshModifier) && navMeshModifier.area == 1)
+                if (clickedObject.TryGetComponent(out NavMeshModifier navMeshModifier) && navMeshModifier.area == 3)
                 {
-                    _gameState.targetObject = clickedObject;
+                    Debug.Log(clickedObject);
+                    _gameState.targetObject = clickedObject.gameObject;
+                    break;
+                }
+                else
+                {
+                    _gameState.targetObject = null;
                 }
             }
 
