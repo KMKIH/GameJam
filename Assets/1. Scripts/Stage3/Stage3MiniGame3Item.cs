@@ -11,12 +11,20 @@ public class Stage3MiniGame3Item : MonoBehaviour, IPointerClickHandler
     public Text textUI;
     private string _paragraph;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip select;
+    SoundManager soundManager;
+    private void Awake()
+    {
+        soundManager = FindObjectOfType<SoundManager>();
+    }
     private void Start() { SetParagraph(); }
 
     private void Update() { SetParagraph(); }
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        soundManager.PlayEffect1(select);
         OnClick();
     }
 

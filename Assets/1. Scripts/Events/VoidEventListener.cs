@@ -10,7 +10,10 @@ public class VoidEventListener : MonoBehaviour
 	private void OnEnable()
 	{
 		if (m_Channel != null)
-			m_Channel.OnEventRaised += OnEventRaised;
+        {
+            m_Channel.OnEventRaised -= OnEventRaised;
+            m_Channel.OnEventRaised += OnEventRaised;
+		}
 	}
 
 	private void OnDisable()

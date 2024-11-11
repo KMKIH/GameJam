@@ -10,6 +10,7 @@ public class Stage3MiniGame3Letter : MonoBehaviour
 
     private void OnEnable()
     {
+        m_selected.OnEventRaised -= UpdateUI;
         m_selected.OnEventRaised += UpdateUI;
     }
     private void OnDisable()

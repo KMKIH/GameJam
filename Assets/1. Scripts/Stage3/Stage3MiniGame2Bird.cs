@@ -18,7 +18,8 @@ public class Stage3MiniGame2Bird : MonoBehaviour
     private bool _isDropped;
     private bool _isCollided = false;
     public float speed;
-
+    [SerializeField] float minTime;
+    [SerializeField] float maxTime;
     void Start()
     {
         _isOutside = true;
@@ -78,6 +79,7 @@ public class Stage3MiniGame2Bird : MonoBehaviour
 
     private void OnEnable()
     {
+        m_collided.OnEventRaised -= OnObjCollided;
         m_collided.OnEventRaised += OnObjCollided;
     }
     private void OnDisable()
@@ -91,7 +93,7 @@ public class Stage3MiniGame2Bird : MonoBehaviour
         _direction = Direction.Right;
         _passedTime = 0f;
         _isDropped = false;
-        _dropTime = Random.Range(5f, 15f);
+        _dropTime = Random.Range(minTime, maxTime);
         _rectTransform.anchoredPosition = new Vector2(-480f, 0f);
         gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         gameObject.GetComponent<Rigidbody2D>().simulated = false;

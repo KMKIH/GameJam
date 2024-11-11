@@ -496,7 +496,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uCE5C\uAD6C \uBAB0\uB798 \uC81C\uD2F0\uB97C \uD0C0\uC11C \uBA39\uC790"
+  m_Text: "\uCE5C\uAD6C \uBAB0\uB798 \uC6B0\uC720\uC5D0 \uC81C\uD2F0\uB97C \uD0C0\uC790"
 --- !u!1 &4068451731680836924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1039,7 +1039,7 @@ MonoBehaviour:
   isOnTheMilk: 0
   isUnderTheDesk: 0
   friendState: 0
-  readyTIme: 1
+  readyTime: 1
   idleMinTime: 3
   idleMaxTime: 8
   turn: {fileID: 8300000, guid: 227dd35d6baf4074cb4d7a69b023ad7f, type: 3}

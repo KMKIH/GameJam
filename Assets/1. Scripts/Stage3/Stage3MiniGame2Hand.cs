@@ -20,7 +20,7 @@ public class Stage3MiniGame2Hand : MonoBehaviour, IBeginDragHandler, IDragHandle
             Debug.LogError("m_collided is not assigned!");
             return;
         }
-        if (IsOverlapping(targetRectTransform))
+        if (IsOverlapping(targetRectTransform) && _isMovable)
         {
             _isMovable = false;
             m_collided.RaiseEvent();

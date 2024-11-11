@@ -6,6 +6,7 @@ public class Stage3MiniGame2 : MiniGameManager
 
     private void OnEnable()
     {
+        m_collided.OnEventRaised -= OnGameClear;
         m_collided.OnEventRaised += OnGameClear;
     }
     private void OnDisable()
@@ -15,7 +16,6 @@ public class Stage3MiniGame2 : MiniGameManager
 
     public void OnGameClear()
     {
-        Debug.Log("전체 ");
         OnSuccessMiniGame();
     }
 }

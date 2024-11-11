@@ -11,6 +11,8 @@ public class Stage3MiniGame1 : MiniGameManager
     [SerializeField] Image trace;
     [SerializeField] Transform candy;
 
+    private bool _isClear = false;
+
     void Start()
     {
         _miniGameState.ResetState();
@@ -21,8 +23,10 @@ public class Stage3MiniGame1 : MiniGameManager
 
     void Update()
     {
-        if (_miniGameState.round >= maxRoundNum)
+        if (_miniGameState.round >= maxRoundNum && _isClear == false)
         {
+            _isClear = true;
+
             trace.DOFade(1f, 0);
             candy.DOScale(0, 0);
             OnSuccessMiniGame();

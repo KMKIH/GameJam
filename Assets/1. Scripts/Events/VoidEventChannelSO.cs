@@ -10,9 +10,11 @@ public class VoidEventChannelSO : ScriptableObject
 
 	public void RaiseEvent()
 	{
-		Debug.Log("RaiseEvent called");
 		if (OnEventRaised != null)
-			OnEventRaised.Invoke();
+        {
+            Debug.Log("RaiseEvent called");
+            OnEventRaised.Invoke();
+		}
 	}
 }
 

@@ -89,8 +89,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGameState: {fileID: 11400000, guid: 35c7dfd6b65194e36becac21adb7f7b2, type: 2}
-  size: 100
   dragDistanceThreshold: 50
+  eatSound: {fileID: 8300000, guid: 77ffac9bc7ed89c4ca55bbcf3c983aa8, type: 3}
 --- !u!1 &1524105706284702966
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +427,7 @@ PrefabInstance:
     - {fileID: 7339114843589661752, guid: 17760850102ab406d8a47210af8f5bda, type: 3}
     - {fileID: 5001374183443091107, guid: 17760850102ab406d8a47210af8f5bda, type: 3}
     - {fileID: 8974649406852124121, guid: 17760850102ab406d8a47210af8f5bda, type: 3}
+    - {fileID: 2497115749369985298, guid: 17760850102ab406d8a47210af8f5bda, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1779624754883586108, guid: 17760850102ab406d8a47210af8f5bda, type: 3}
       insertIndex: -1

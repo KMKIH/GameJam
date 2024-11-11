@@ -23,6 +23,7 @@ public class Stage1MiniGame3 : MiniGameManager
 
     void OnEnable()
     {
+        m_foodEat.OnEventRaised -= OnFoodEatEvent;
         m_foodEat.OnEventRaised += OnFoodEatEvent;
     }
     void OnDisable()

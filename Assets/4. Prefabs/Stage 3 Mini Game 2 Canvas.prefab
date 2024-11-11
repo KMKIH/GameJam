@@ -376,6 +376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_collided: {fileID: 11400000, guid: 4e1c9bd1abf094713981bc8f5566b347, type: 2}
   speed: 300
+  minTime: 4
+  maxTime: 8
 --- !u!1001 &79868469101349908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -483,6 +485,7 @@ PrefabInstance:
     - {fileID: 3454456343206386322, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
     - {fileID: 3279193811624382729, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
     - {fileID: 6304003585530791158, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
+    - {fileID: 822995351174256473, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3566335419796866679, guid: 0f85d142d433b4e51903a492d90c9484, type: 3}
       insertIndex: -1

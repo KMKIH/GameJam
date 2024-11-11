@@ -16,7 +16,14 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
     private bool _movedDown = false;
     private Vector2 _startPosition;
 
+    [Header("Sound")]
+    [SerializeField] AudioClip eatSound;
+    SoundManager _soundManager;
 
+    private void Awake()
+    {
+        _soundManager = FindObjectOfType<SoundManager>();
+    }
     void Start()
     {
         _targetTransform = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
@@ -77,6 +84,7 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
         {
             _dragCount = 0;
             _miniGameState.round += 1;
+            _soundManager.PlayEffect1(eatSound);
         }
     }
 
