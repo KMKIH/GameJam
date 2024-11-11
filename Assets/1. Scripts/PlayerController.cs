@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
 
     private bool _isWalking;
 
+    [SerializeField] RectTransform _renderTexture;
+
     [Header("Sound")]
     [SerializeField] AudioClip[] walkSounds;
     [SerializeField] float _soundInterval = 0.5f;
@@ -122,7 +124,23 @@ public class PlayerController : MonoBehaviour
     }
     private void MoveToClickPosition()
     {
-        Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
+        Vector2 localPoint;
+        // 마우스 위치를 렌더 텍스처 RectTransform 기준의 로컬 좌표로 변환
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(
+            _renderTexture,
+            Input.mousePosition,
+            null,
+            out localPoint
+        );
+
+        // 렌더 텍스처의 크기 비율에 맞게 로컬 좌표를 정규화
+        Vector2 normalizedPoint = new Vector2(
+            (localPoint.x / _renderTexture.rect.width) + 0.5f,
+            (localPoint.y / _renderTexture.rect.height) + 0.5f
+        );
+
+        // 카메라가 바라보는 월드 좌표를 계산
+        Ray ray = _mainCamera.ViewportPointToRay(normalizedPoint);
         RaycastHit2D[] hits = Physics2D.GetRayIntersectionAll(ray);
 
         foreach (var hit in hits)

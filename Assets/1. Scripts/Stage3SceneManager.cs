@@ -88,8 +88,11 @@ public class Stage3SceneManager : StageSceneManager
     {
         if (clearList[0] && clearList[1])
         {
-            ActiveList[2] = true;
-            objectImages[2].sprite = activeSprites[2];
+            if (ActiveList[2] == false)
+            {
+                ActiveList[2] = true;
+                objectImages[2].sprite = activeSprites[2];
+            }
         }
     }
 }

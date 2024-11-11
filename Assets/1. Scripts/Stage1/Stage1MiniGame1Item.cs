@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using Unity.VisualScripting;
 
 public class Stage1MiniGame1Item : MonoBehaviour
 {
@@ -23,17 +21,23 @@ public class Stage1MiniGame1Item : MonoBehaviour
     SoundManager _soundManager;
     [SerializeField] float effectVolume = 0.5f;
 
-    void Awake()
+    private void OnEnable()
     {
         _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
         _rectTransform = GetComponent<RectTransform>();
         _soundManager = FindObjectOfType<SoundManager>();
         _isGrabbed = false;
     }
-
     void Update()
     {
         if (gameManager._gameState.MiniGameState != MiniGameState.OnGoing) return;
+
+        if (_targetUI == null)
+            _targetUI = GameObject.FindGameObjectsWithTag("Mini Game Goal")[0].GetComponent<RectTransform>();
+        if (_rectTransform == null)
+            _rectTransform = GetComponent<RectTransform>();
+        if (_soundManager != null)
+            _soundManager = FindObjectOfType<SoundManager>();
 
         // Grab
         if (Input.GetMouseButtonDown(0))
@@ -52,7 +56,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
         {
             _soundManager.PlayEffect1(_dropSound, effectVolume);
             _isGrabbed = false;
-            if(IsOverlapping(_targetUI))
+            if (IsOverlapping(_targetUI))
             {
                 if (isRightItem)
                 {
@@ -68,7 +72,7 @@ public class Stage1MiniGame1Item : MonoBehaviour
     private void OnClick()
     {
         GraphicRaycaster raycaster = GetComponentInParent<GraphicRaycaster>();
-        
+
         if (raycaster != null)
         {
             PointerEventData pointerEventData = new PointerEventData(EventSystem.current);

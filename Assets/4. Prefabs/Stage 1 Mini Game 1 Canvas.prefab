@@ -141,6 +141,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &924153187419919365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +308,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &8556410310030367241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,6 +475,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &4683057847146213267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,6 +800,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &3225952693551791681
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1038,6 +1042,7 @@ MonoBehaviour:
   isRightItem: 1
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &9177344881984127410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1322,6 +1327,7 @@ MonoBehaviour:
   isRightItem: 1
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &3243113342397609460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1488,6 +1494,7 @@ MonoBehaviour:
   isRightItem: 1
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &3095100092404400487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1654,6 +1661,7 @@ MonoBehaviour:
   isRightItem: 1
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &696510692717833778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1899,6 +1907,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &5779788781903312600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2065,6 +2074,7 @@ MonoBehaviour:
   isRightItem: 0
   _grapSound: {fileID: 8300000, guid: ecbefc5a9cf41bb4aa12709057679cfd, type: 3}
   _dropSound: {fileID: 8300000, guid: 6554760aa78bc4f42a04304f1a54630b, type: 3}
+  effectVolume: 0.5
 --- !u!114 &3044075609450054065
 MonoBehaviour:
   m_ObjectHideFlags: 0
