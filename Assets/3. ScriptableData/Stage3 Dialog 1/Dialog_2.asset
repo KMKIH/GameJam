@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49bd27d43e6b314419a2e7371b0380b2, type: 3}
   m_Name: Dialog_2
   m_EditorClassIdentifier: 
-  dialogs: []
+  dialogs:
+  - "\uC8FC\uC778\uACF5: (\uB208\uC744 \uB728\uBA70) \u201C\uBBF8\uC548\uD574.. \uC624\uB798
+    \uAE30\uB2E4\uB838\uC9C0....?\u201D"

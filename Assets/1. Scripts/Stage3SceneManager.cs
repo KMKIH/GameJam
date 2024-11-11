@@ -10,11 +10,7 @@ public class Stage3SceneManager : StageSceneManager
 
     [Header("Audio")]
     [SerializeField] AudioClip bgm;
-    AudioSource audioSource;
-    private void Awake()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+
     private void Start()
     {
         // 게임 시작 시 Fade In
@@ -35,8 +31,15 @@ public class Stage3SceneManager : StageSceneManager
         portal.gameObject.SetActive(false);
 
         // Event 연결
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
         _gameState.OnMiniGameStateChanged += CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
         _gameState.OnMiniGameStateChanged += ActiveObject;
+    }
+    void OnDestroy()
+    {
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
     }
     async void StartCutScene()
     {

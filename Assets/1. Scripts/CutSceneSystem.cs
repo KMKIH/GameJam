@@ -51,6 +51,10 @@ public class CutSceneSystem : MonoBehaviour
 
         // 시작
         LeftFade.instance.FadeOut(0);
+        if (cutSceneIndex < audioClips.Length && audioClips[cutSceneIndex] != null)
+        {
+            _ = soundManager.PlayWithFadeOut(audioClips[cutSceneIndex]);
+        }
         while (true)
         {
             await UniTask.NextFrame();
@@ -58,10 +62,6 @@ public class CutSceneSystem : MonoBehaviour
             {
                 LeftFade.instance.FadeIn();
                 cutSceneBase.sprite = cutScene[cutSceneIndex];
-                if (cutSceneIndex < audioClips.Length && audioClips[cutSceneIndex] != null)
-                {
-                    _ = soundManager.PlayWithFadeOut(audioClips[cutSceneIndex]);
-                }
                 break;
             }
         }

@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Game State
   m_EditorClassIdentifier: 
   targetObject: {fileID: 0}
+  targetMiniGame: {fileID: 3896367825784180761, guid: fd26850227f4b42249966189f5b0f88c, type: 3}
+  playerState: 0

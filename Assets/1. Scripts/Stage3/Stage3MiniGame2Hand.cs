@@ -8,9 +8,11 @@ public class Stage3MiniGame2Hand : MonoBehaviour, IBeginDragHandler, IDragHandle
     private RectTransform _rectTransform;
     private bool _isMovable = true;
 
+    private Vector2 _initPosition;
     void Start()
     {
         _rectTransform = GetComponent<RectTransform>();
+        _initPosition = _rectTransform.localPosition;
     }
 
     void Update()
@@ -42,7 +44,7 @@ public class Stage3MiniGame2Hand : MonoBehaviour, IBeginDragHandler, IDragHandle
     public void OnEndDrag(PointerEventData eventData)
     {
         if (!_isMovable) return;
-        transform.position = new Vector2(Input.mousePosition.x, transform.position.y);
+        _rectTransform.localPosition = _initPosition;
     }
 
 

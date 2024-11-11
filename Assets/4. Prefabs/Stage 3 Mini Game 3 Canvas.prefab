@@ -421,6 +421,7 @@ MonoBehaviour:
   _gameObject2: {fileID: 1856859514402208235}
   _clearImage1: {fileID: 1084319286448566088}
   _clearImage2: {fileID: 1373189930772978859}
+  _cutSceneBgm: {fileID: 8300000, guid: 279591b850bca0540bc6cdeb73bdc81a, type: 3}
 --- !u!1 &3431307239124079024
 GameObject:
   m_ObjectHideFlags: 0

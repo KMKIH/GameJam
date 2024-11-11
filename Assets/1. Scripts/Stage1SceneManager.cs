@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 
 public class Stage1SceneManager : StageSceneManager
 {
@@ -37,8 +38,15 @@ public class Stage1SceneManager : StageSceneManager
         portal.gameObject.SetActive(false);
 
         // Event ¿¬°á
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
         _gameState.OnMiniGameStateChanged += CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
         _gameState.OnMiniGameStateChanged += ActiveObject;
+    }
+    void OnDestroy()
+    {
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
     }
     async void StartCutScene()
     {

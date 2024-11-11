@@ -16,8 +16,13 @@ public class Stage3MiniGame3 : MiniGameManager
     [SerializeField] private Image _clearImage1;
     [SerializeField] private Image _clearImage2;
 
+    [Header("Audio")]
+    [SerializeField] private AudioClip _cutSceneBgm;
+    SoundManager _soundManager;
     void Start()
     {
+        _soundManager = FindObjectOfType<SoundManager>();
+
         _miniGameState.ResetState();
 
         _clearImage1.DOFade(0, 0);
@@ -59,6 +64,7 @@ public class Stage3MiniGame3 : MiniGameManager
 
         if (_miniGameState.selectedEndParagraph.Length > 0)
         {
+            _ = _soundManager.PlayWithFadeOut(_cutSceneBgm, 1, true);
             _gameObject1.SetActive(false);
             _clearImage1.gameObject.SetActive(true);
             _clearImage1.DOFade(1, 1);
@@ -67,6 +73,7 @@ public class Stage3MiniGame3 : MiniGameManager
             _clearImage2.gameObject.SetActive(true);
             _clearImage2.DOFade(1, 1);
             await UniTask.WaitForSeconds(2f);
+            await _soundManager.Stop();
             OnSuccessMiniGame();
         }
     }

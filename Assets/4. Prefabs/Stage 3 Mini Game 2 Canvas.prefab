@@ -375,7 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_collided: {fileID: 11400000, guid: 4e1c9bd1abf094713981bc8f5566b347, type: 2}
-  speed: 300
+  speed: 500
   minTime: 4
   maxTime: 8
 --- !u!1001 &79868469101349908

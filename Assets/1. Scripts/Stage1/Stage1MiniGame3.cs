@@ -7,6 +7,8 @@ public class Stage1MiniGame3 : MiniGameManager
     [SerializeField] private VoidEventChannelSO m_foodEat;
     private GameObject _miniGame3StateObj;
 
+    bool isClear = false;
+
     void Start()
     {
         _miniGame3State.ResetState();
@@ -15,8 +17,9 @@ public class Stage1MiniGame3 : MiniGameManager
     }
     void Update()
     {
-        if (_miniGame3State.life >= 3)
+        if (_miniGame3State.life >= 3 && isClear == false)
         {
+            isClear = true;
             OnSuccessMiniGame();
         }
     }

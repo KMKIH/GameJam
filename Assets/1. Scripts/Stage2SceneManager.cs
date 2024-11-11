@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Stage2SceneManager : StageSceneManager
@@ -34,8 +35,15 @@ public class Stage2SceneManager : StageSceneManager
         portal.gameObject.SetActive(false);
 
         // Event ¿¬°á
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
         _gameState.OnMiniGameStateChanged += CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
         _gameState.OnMiniGameStateChanged += ActiveObject;
+    }
+    void OnDestroy()
+    {
+        _gameState.OnMiniGameStateChanged -= CheckClearState;
+        _gameState.OnMiniGameStateChanged -= ActiveObject;
     }
     async void StartCutScene()
     {

@@ -15,6 +15,7 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
     private bool _movedUp = false;
     private bool _movedDown = false;
     private Vector2 _startPosition;
+    private Vector2 _initPosition;
 
     [Header("Sound")]
     [SerializeField] AudioClip eatSound;
@@ -30,6 +31,8 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
         _rectTransform = GetComponent<RectTransform>();
         _dragCount = 0;
         _ratio = 1f;
+
+        _initPosition =_rectTransform.localPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -75,6 +78,8 @@ public class Stage3MiniGame1Item : MonoBehaviour, IBeginDragHandler, IDragHandle
     {
         _movedUp = false;
         _movedDown = false;
+
+        _rectTransform.localPosition = _initPosition;
     }
 
     private void IncrementCounter()
