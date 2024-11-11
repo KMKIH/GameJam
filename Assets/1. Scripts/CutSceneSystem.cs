@@ -80,13 +80,13 @@ public class CutSceneSystem : MonoBehaviour
 
         StartFadeOut();
         RightFade.instance.FadeOut();
-        await LeftFade.instance.FadeOut();
+        await LeftFade.instance.FadeOutAsync();
 
         cutSceneBase.gameObject.SetActive(false);
         dialogParents.gameObject.SetActive(false);
 
         RightFade.instance.FadeIn();
-        await LeftFade.instance.FadeIn();
+        await LeftFade.instance.FadeInAsync();
     }
     //////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////

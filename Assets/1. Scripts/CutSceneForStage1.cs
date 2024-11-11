@@ -62,13 +62,13 @@ public class CutSceneForStage1 : CutSceneSystem
 
         StartFadeOut();
         RightFade.instance.FadeOut();
-        await LeftFade.instance.FadeOut();
+        await LeftFade.instance.FadeOutAsync();
 
         cutSceneBase.gameObject.SetActive(false);
         dialogParents.gameObject.SetActive(false);
 
         RightFade.instance.FadeIn();
-        await LeftFade.instance.FadeIn();
+        await LeftFade.instance.FadeInAsync();
 
         audioSource.clip = audioClips[audioClips.Length-1];
         audioSource.Play();
