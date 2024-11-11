@@ -1,19 +1,42 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using DG.Tweening;
+using Cysharp.Threading.Tasks;
+
 public class StartSceneManager : MonoBehaviour
 {
-    [SerializeField] Image title;
+    [SerializeField] Image fadeImage;
+    [SerializeField] Text noticeText;
+    private void Start()
+    {
+        Sequence blinkSequence = DOTween.Sequence();
+        blinkSequence
+            .Append(noticeText.DOFade(0, 1).SetEase(Ease.InSine))
+            .Append(noticeText.DOFade(1, 1).SetEase(Ease.InSine));
+        blinkSequence.SetLoops(-1);
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PlayerPrefs.SetInt("NewGaem", 1); // »õ°ÔÀÓÀÌ´Ù
-            title.DOFade(0, 1);
-            SceneManager.LoadScene("Stage1");
+            GameStart();
         }
+    }
+    async void GameStart()
+    {
+        // í˜ì´ë“œ ì•„ì›ƒ
+        fadeImage.DOFade(1, 1);
+        while (true)
+        {
+            await UniTask.NextFrame();
+            if (fadeImage.color.a >= 1) break;
+        }
+
+        // ë‹¤ìŒì”¬ ì´ë™
+        SceneManager.LoadScene("Stage1");
     }
 }
